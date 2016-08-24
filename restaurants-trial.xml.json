@@ -1,0 +1,1130 @@
+{
+    "813": {
+        "Sentence": "All the appetizers and salads were fabulous, the steak was mouth watering and the pasta was delicious!!!", 
+        "CatAndPolarity": {
+            "Cat": [
+                "food"
+            ], 
+            "Polarity": [
+                "positive"
+            ]
+        }
+    }, 
+    "1579": {
+        "Sentence": "And really large portions.", 
+        "CatAndPolarity": {
+            "Cat": [
+                "food"
+            ], 
+            "Polarity": [
+                "positive"
+            ]
+        }
+    }, 
+    "2707": {
+        "Sentence": "Go inside and you won't want to leave.", 
+        "CatAndPolarity": {
+            "Cat": [
+                "anecdotes/miscellaneous"
+            ], 
+            "Polarity": [
+                "positive"
+            ]
+        }
+    }, 
+    "3126": {
+        "Sentence": "Save yourself the time and trouble and skip this one!", 
+        "CatAndPolarity": {
+            "Cat": [
+                "anecdotes/miscellaneous"
+            ], 
+            "Polarity": [
+                "negative"
+            ]
+        }
+    }, 
+    "2882": {
+        "Sentence": "The sweet lassi was excellent as was the lamb chettinad and the garlic naan but the rasamalai was forgettable.", 
+        "CatAndPolarity": {
+            "Cat": [
+                "food"
+            ], 
+            "Polarity": [
+                "conflict"
+            ]
+        }
+    }, 
+    "1609": {
+        "Sentence": "Service was quick.", 
+        "CatAndPolarity": {
+            "Cat": [
+                "service"
+            ], 
+            "Polarity": [
+                "positive"
+            ]
+        }
+    }, 
+    "3018": {
+        "Sentence": "Oh, don't even let me start with how expensive the bills were!", 
+        "CatAndPolarity": {
+            "Cat": [
+                "price"
+            ], 
+            "Polarity": [
+                "negative"
+            ]
+        }
+    }, 
+    "3292": {
+        "Sentence": "Service is top notch.", 
+        "CatAndPolarity": {
+            "Cat": [
+                "service"
+            ], 
+            "Polarity": [
+                "positive"
+            ]
+        }
+    }, 
+    "2041": {
+        "Sentence": "The best thing I tasted were the lambc hops.", 
+        "CatAndPolarity": {
+            "Cat": [
+                "food"
+            ], 
+            "Polarity": [
+                "positive"
+            ]
+        }
+    }, 
+    "2609": {
+        "Sentence": "Overall I would recommend it and go back again.", 
+        "CatAndPolarity": {
+            "Cat": [
+                "anecdotes/miscellaneous"
+            ], 
+            "Polarity": [
+                "positive"
+            ]
+        }
+    }, 
+    "1194": {
+        "Sentence": "I've been here a couple of times and have not been impressed.", 
+        "CatAndPolarity": {
+            "Cat": [
+                "anecdotes/miscellaneous"
+            ], 
+            "Polarity": [
+                "negative"
+            ]
+        }
+    }, 
+    "3440": {
+        "Sentence": "Even though its good seafood, the prices are too high.", 
+        "CatAndPolarity": {
+            "Cat": [
+                "food", 
+                "price"
+            ], 
+            "Polarity": [
+                "positive", 
+                "negative"
+            ]
+        }
+    }, 
+    "870": {
+        "Sentence": "In addition, the food is very good and the prices are reasonable.", 
+        "CatAndPolarity": {
+            "Cat": [
+                "food", 
+                "price"
+            ], 
+            "Polarity": [
+                "positive", 
+                "positive"
+            ]
+        }
+    }, 
+    "2507": {
+        "Sentence": "The food is great and authentic.", 
+        "CatAndPolarity": {
+            "Cat": [
+                "food"
+            ], 
+            "Polarity": [
+                "positive"
+            ]
+        }
+    }, 
+    "586": {
+        "Sentence": "I was at Rao's last Wed.", 
+        "CatAndPolarity": {
+            "Cat": [
+                "anecdotes/miscellaneous"
+            ], 
+            "Polarity": [
+                "neutral"
+            ]
+        }
+    }, 
+    "3081": {
+        "Sentence": "I recommend the garlic shrimp, okra (bindi), and anything with lamb.", 
+        "CatAndPolarity": {
+            "Cat": [
+                "food"
+            ], 
+            "Polarity": [
+                "positive"
+            ]
+        }
+    }, 
+    "1884": {
+        "Sentence": "The menu was impressive with selections ranging from a burger, to steak, to escargot.", 
+        "CatAndPolarity": {
+            "Cat": [
+                "food"
+            ], 
+            "Polarity": [
+                "positive"
+            ]
+        }
+    }, 
+    "2077": {
+        "Sentence": "very good breads as well.", 
+        "CatAndPolarity": {
+            "Cat": [
+                "food"
+            ], 
+            "Polarity": [
+                "positive"
+            ]
+        }
+    }, 
+    "201": {
+        "Sentence": "Anyway, the food is good, the price is right and they have a decent wine list.", 
+        "CatAndPolarity": {
+            "Cat": [
+                "food", 
+                "price"
+            ], 
+            "Polarity": [
+                "positive", 
+                "positive"
+            ]
+        }
+    }, 
+    "3049": {
+        "Sentence": "The food was lousy -too sweet or too salty and the portions tiny.", 
+        "CatAndPolarity": {
+            "Cat": [
+                "food"
+            ], 
+            "Polarity": [
+                "negative"
+            ]
+        }
+    }, 
+    "1242": {
+        "Sentence": "But the coconut rice was good.", 
+        "CatAndPolarity": {
+            "Cat": [
+                "food"
+            ], 
+            "Polarity": [
+                "positive"
+            ]
+        }
+    }, 
+    "2211": {
+        "Sentence": "And the Tom Kha soup was pathetic.", 
+        "CatAndPolarity": {
+            "Cat": [
+                "food"
+            ], 
+            "Polarity": [
+                "negative"
+            ]
+        }
+    }, 
+    "3343": {
+        "Sentence": "The food now is inconsistent.", 
+        "CatAndPolarity": {
+            "Cat": [
+                "food"
+            ], 
+            "Polarity": [
+                "negative"
+            ]
+        }
+    }, 
+    "2141": {
+        "Sentence": "Try the crunchy tuna, it is to die for.", 
+        "CatAndPolarity": {
+            "Cat": [
+                "food"
+            ], 
+            "Polarity": [
+                "positive"
+            ]
+        }
+    }, 
+    "83": {
+        "Sentence": "Reasonable prices.", 
+        "CatAndPolarity": {
+            "Cat": [
+                "price"
+            ], 
+            "Polarity": [
+                "positive"
+            ]
+        }
+    }, 
+    "381": {
+        "Sentence": "Everything at Sala Thai is tasty and well-portioned.", 
+        "CatAndPolarity": {
+            "Cat": [
+                "food"
+            ], 
+            "Polarity": [
+                "positive"
+            ]
+        }
+    }, 
+    "3315": {
+        "Sentence": "Add to that great service and great food at a reasonable price and you have yourself the beginning of a great evening.", 
+        "CatAndPolarity": {
+            "Cat": [
+                "food", 
+                "price", 
+                "service"
+            ], 
+            "Polarity": [
+                "positive", 
+                "positive", 
+                "positive"
+            ]
+        }
+    }, 
+    "1709": {
+        "Sentence": "Unfortunately, the food was NOT something to get worked up about.", 
+        "CatAndPolarity": {
+            "Cat": [
+                "food"
+            ], 
+            "Polarity": [
+                "negative"
+            ]
+        }
+    }, 
+    "193": {
+        "Sentence": "The food is great and reasonably priced.", 
+        "CatAndPolarity": {
+            "Cat": [
+                "food", 
+                "price"
+            ], 
+            "Polarity": [
+                "positive", 
+                "positive"
+            ]
+        }
+    }, 
+    "2459": {
+        "Sentence": "I got enough reasons to keep coming back!!!", 
+        "CatAndPolarity": {
+            "Cat": [
+                "anecdotes/miscellaneous"
+            ], 
+            "Polarity": [
+                "positive"
+            ]
+        }
+    }, 
+    "1293": {
+        "Sentence": "Their calzones are horrific, bad, vomit-inducing, YUCK.", 
+        "CatAndPolarity": {
+            "Cat": [
+                "food"
+            ], 
+            "Polarity": [
+                "negative"
+            ]
+        }
+    }, 
+    "2105": {
+        "Sentence": "A few tips: skip the turnip cake, roast pork buns and egg custards.", 
+        "CatAndPolarity": {
+            "Cat": [
+                "food"
+            ], 
+            "Polarity": [
+                "negative"
+            ]
+        }
+    }, 
+    "2152": {
+        "Sentence": "The bagels are fabulous.", 
+        "CatAndPolarity": {
+            "Cat": [
+                "food"
+            ], 
+            "Polarity": [
+                "positive"
+            ]
+        }
+    }, 
+    "3358": {
+        "Sentence": "I never had anything I didn't like here.", 
+        "CatAndPolarity": {
+            "Cat": [
+                "anecdotes/miscellaneous"
+            ], 
+            "Polarity": [
+                "positive"
+            ]
+        }
+    }, 
+    "2751": {
+        "Sentence": "I definitely wouldn't go back.", 
+        "CatAndPolarity": {
+            "Cat": [
+                "anecdotes/miscellaneous"
+            ], 
+            "Polarity": [
+                "negative"
+            ]
+        }
+    }, 
+    "882": {
+        "Sentence": "While the ambiance and atmosphere were great, the food and service could have been a lot better.", 
+        "CatAndPolarity": {
+            "Cat": [
+                "ambience", 
+                "food", 
+                "service"
+            ], 
+            "Polarity": [
+                "positive", 
+                "negative", 
+                "negative"
+            ]
+        }
+    }, 
+    "1124": {
+        "Sentence": "Our waitress was sweet and accomodating, not overbearing.", 
+        "CatAndPolarity": {
+            "Cat": [
+                "service"
+            ], 
+            "Polarity": [
+                "positive"
+            ]
+        }
+    }, 
+    "3546": {
+        "Sentence": "I have tried literally every restaurant on curry row.", 
+        "CatAndPolarity": {
+            "Cat": [
+                "anecdotes/miscellaneous"
+            ], 
+            "Polarity": [
+                "neutral"
+            ]
+        }
+    }, 
+    "3020": {
+        "Sentence": "My goodness, everything from the fish to the rice to the seaweed was absolutely amazing.", 
+        "CatAndPolarity": {
+            "Cat": [
+                "food"
+            ], 
+            "Polarity": [
+                "positive"
+            ]
+        }
+    }, 
+    "746": {
+        "Sentence": "I went to this restaurant with a woman that I met recently.", 
+        "CatAndPolarity": {
+            "Cat": [
+                "anecdotes/miscellaneous"
+            ], 
+            "Polarity": [
+                "neutral"
+            ]
+        }
+    }, 
+    "3170": {
+        "Sentence": "Good spreads, great beverage selections and bagels really tasty.", 
+        "CatAndPolarity": {
+            "Cat": [
+                "food"
+            ], 
+            "Polarity": [
+                "positive"
+            ]
+        }
+    }, 
+    "2171": {
+        "Sentence": "The food options rule.", 
+        "CatAndPolarity": {
+            "Cat": [
+                "food"
+            ], 
+            "Polarity": [
+                "positive"
+            ]
+        }
+    }, 
+    "2811": {
+        "Sentence": "Consistently good Japanese Tapas.", 
+        "CatAndPolarity": {
+            "Cat": [
+                "food"
+            ], 
+            "Polarity": [
+                "positive"
+            ]
+        }
+    }, 
+    "762": {
+        "Sentence": "I went to Ruby Foo's after work with a group of 6.", 
+        "CatAndPolarity": {
+            "Cat": [
+                "anecdotes/miscellaneous"
+            ], 
+            "Polarity": [
+                "neutral"
+            ]
+        }
+    }, 
+    "339": {
+        "Sentence": "The sushi was awful!", 
+        "CatAndPolarity": {
+            "Cat": [
+                "food"
+            ], 
+            "Polarity": [
+                "negative"
+            ]
+        }
+    }, 
+    "217": {
+        "Sentence": "My boyfriend and I went there to celebrate my birthday the other night and all I can say is that it was magnificent.", 
+        "CatAndPolarity": {
+            "Cat": [
+                "anecdotes/miscellaneous"
+            ], 
+            "Polarity": [
+                "positive"
+            ]
+        }
+    }, 
+    "3478": {
+        "Sentence": "Now it's so crowded and loud you can't even talk to the person next to you.", 
+        "CatAndPolarity": {
+            "Cat": [
+                "ambience"
+            ], 
+            "Polarity": [
+                "negative"
+            ]
+        }
+    }, 
+    "1180": {
+        "Sentence": "Go, go, hurry, before everyone finds out about it.", 
+        "CatAndPolarity": {
+            "Cat": [
+                "anecdotes/miscellaneous"
+            ], 
+            "Polarity": [
+                "positive"
+            ]
+        }
+    }, 
+    "3372": {
+        "Sentence": "I've been many time and have never been disappointed.", 
+        "CatAndPolarity": {
+            "Cat": [
+                "anecdotes/miscellaneous"
+            ], 
+            "Polarity": [
+                "positive"
+            ]
+        }
+    }, 
+    "776": {
+        "Sentence": "The food was great.", 
+        "CatAndPolarity": {
+            "Cat": [
+                "food"
+            ], 
+            "Polarity": [
+                "positive"
+            ]
+        }
+    }, 
+    "3208": {
+        "Sentence": "Don't leave without trying One Night in Tokyo.", 
+        "CatAndPolarity": {
+            "Cat": [
+                "anecdotes/miscellaneous"
+            ], 
+            "Polarity": [
+                "positive"
+            ]
+        }
+    }, 
+    "2673": {
+        "Sentence": "I would go back tho.", 
+        "CatAndPolarity": {
+            "Cat": [
+                "anecdotes/miscellaneous"
+            ], 
+            "Polarity": [
+                "positive"
+            ]
+        }
+    }, 
+    "1380": {
+        "Sentence": "Definately check it out!!!", 
+        "CatAndPolarity": {
+            "Cat": [
+                "anecdotes/miscellaneous"
+            ], 
+            "Polarity": [
+                "positive"
+            ]
+        }
+    }, 
+    "3641": {
+        "Sentence": "You cannot go wrong with this place.", 
+        "CatAndPolarity": {
+            "Cat": [
+                "anecdotes/miscellaneous"
+            ], 
+            "Polarity": [
+                "positive"
+            ]
+        }
+    }, 
+    "2806": {
+        "Sentence": "As a Japanese native, I've lived in the Tristate area for over 8 years, but I was just so amazed at this place.", 
+        "CatAndPolarity": {
+            "Cat": [
+                "anecdotes/miscellaneous"
+            ], 
+            "Polarity": [
+                "positive"
+            ]
+        }
+    }, 
+    "2630": {
+        "Sentence": "I loving bringing friends here -and I do so every chance I get.", 
+        "CatAndPolarity": {
+            "Cat": [
+                "anecdotes/miscellaneous"
+            ], 
+            "Polarity": [
+                "positive"
+            ]
+        }
+    }, 
+    "924": {
+        "Sentence": "With the theater 2 blocks away we had a delicious meal in a beautiful room.", 
+        "CatAndPolarity": {
+            "Cat": [
+                "food", 
+                "ambience"
+            ], 
+            "Polarity": [
+                "positive", 
+                "positive"
+            ]
+        }
+    }, 
+    "3411": {
+        "Sentence": "Even my Indian friend couldn't believe how good and tasty everything was.", 
+        "CatAndPolarity": {
+            "Cat": [
+                "food"
+            ], 
+            "Polarity": [
+                "positive"
+            ]
+        }
+    }, 
+    "2164": {
+        "Sentence": "We were not dissappointed in the least bit by this little gem.", 
+        "CatAndPolarity": {
+            "Cat": [
+                "anecdotes/miscellaneous"
+            ], 
+            "Polarity": [
+                "positive"
+            ]
+        }
+    }, 
+    "3077": {
+        "Sentence": "A pleasant surprise.", 
+        "CatAndPolarity": {
+            "Cat": [
+                "anecdotes/miscellaneous"
+            ], 
+            "Polarity": [
+                "positive"
+            ]
+        }
+    }, 
+    "745": {
+        "Sentence": "This was a repeat visit and we'll definitely be back again.", 
+        "CatAndPolarity": {
+            "Cat": [
+                "anecdotes/miscellaneous"
+            ], 
+            "Polarity": [
+                "positive"
+            ]
+        }
+    }, 
+    "1273": {
+        "Sentence": "I love the fact that the pizza tastes so good and is so cheap.", 
+        "CatAndPolarity": {
+            "Cat": [
+                "food", 
+                "price"
+            ], 
+            "Polarity": [
+                "positive", 
+                "positive"
+            ]
+        }
+    }, 
+    "179": {
+        "Sentence": "Service was prompt, friendly and great.", 
+        "CatAndPolarity": {
+            "Cat": [
+                "service"
+            ], 
+            "Polarity": [
+                "positive"
+            ]
+        }
+    }, 
+    "2460": {
+        "Sentence": "OU MUST TRY THIS RESTAURANT.", 
+        "CatAndPolarity": {
+            "Cat": [
+                "anecdotes/miscellaneous"
+            ], 
+            "Polarity": [
+                "positive"
+            ]
+        }
+    }, 
+    "3045": {
+        "Sentence": "All pretty good.", 
+        "CatAndPolarity": {
+            "Cat": [
+                "anecdotes/miscellaneous"
+            ], 
+            "Polarity": [
+                "positive"
+            ]
+        }
+    }, 
+    "1698": {
+        "Sentence": "Have eaten at Ginger House several times, and it's always good.", 
+        "CatAndPolarity": {
+            "Cat": [
+                "anecdotes/miscellaneous"
+            ], 
+            "Polarity": [
+                "positive"
+            ]
+        }
+    }, 
+    "109": {
+        "Sentence": "I haven't eat a lamb chop as delicious as that, the salads are really nice dressed with lemon and extra virgnin olive oil.", 
+        "CatAndPolarity": {
+            "Cat": [
+                "food"
+            ], 
+            "Polarity": [
+                "positive"
+            ]
+        }
+    }, 
+    "1057": {
+        "Sentence": "Drawbacks: service is slow and they don't toast!", 
+        "CatAndPolarity": {
+            "Cat": [
+                "service"
+            ], 
+            "Polarity": [
+                "negative"
+            ]
+        }
+    }, 
+    "2186": {
+        "Sentence": "It is by far my favorite restaurant in Brooklyn.", 
+        "CatAndPolarity": {
+            "Cat": [
+                "anecdotes/miscellaneous"
+            ], 
+            "Polarity": [
+                "positive"
+            ]
+        }
+    }, 
+    "3471": {
+        "Sentence": "I've been to Joya twice and I will never go again.", 
+        "CatAndPolarity": {
+            "Cat": [
+                "anecdotes/miscellaneous"
+            ], 
+            "Polarity": [
+                "negative"
+            ]
+        }
+    }, 
+    "1401": {
+        "Sentence": "A hearty two thumbs up!", 
+        "CatAndPolarity": {
+            "Cat": [
+                "anecdotes/miscellaneous"
+            ], 
+            "Polarity": [
+                "positive"
+            ]
+        }
+    }, 
+    "1112": {
+        "Sentence": "Great find!!!", 
+        "CatAndPolarity": {
+            "Cat": [
+                "anecdotes/miscellaneous"
+            ], 
+            "Polarity": [
+                "positive"
+            ]
+        }
+    }, 
+    "3368": {
+        "Sentence": "If only they delivered, they'd make a mint!", 
+        "CatAndPolarity": {
+            "Cat": [
+                "anecdotes/miscellaneous"
+            ], 
+            "Polarity": [
+                "positive"
+            ]
+        }
+    }, 
+    "3495": {
+        "Sentence": "Was surprisingly disappointed.", 
+        "CatAndPolarity": {
+            "Cat": [
+                "anecdotes/miscellaneous"
+            ], 
+            "Polarity": [
+                "negative"
+            ]
+        }
+    }, 
+    "2451": {
+        "Sentence": "The prices were fantastic.", 
+        "CatAndPolarity": {
+            "Cat": [
+                "price"
+            ], 
+            "Polarity": [
+                "positive"
+            ]
+        }
+    }, 
+    "948": {
+        "Sentence": "I'm told that it is open 24hrs which is good.", 
+        "CatAndPolarity": {
+            "Cat": [
+                "anecdotes/miscellaneous"
+            ], 
+            "Polarity": [
+                "positive"
+            ]
+        }
+    }, 
+    "2202": {
+        "Sentence": "What more could you want?", 
+        "CatAndPolarity": {
+            "Cat": [
+                "anecdotes/miscellaneous"
+            ], 
+            "Polarity": [
+                "positive"
+            ]
+        }
+    }, 
+    "2740": {
+        "Sentence": "Excellent experience.", 
+        "CatAndPolarity": {
+            "Cat": [
+                "anecdotes/miscellaneous"
+            ], 
+            "Polarity": [
+                "positive"
+            ]
+        }
+    }, 
+    "537": {
+        "Sentence": "Definitely a neighborhood favorite.", 
+        "CatAndPolarity": {
+            "Cat": [
+                "anecdotes/miscellaneous"
+            ], 
+            "Polarity": [
+                "positive"
+            ]
+        }
+    }, 
+    "1548": {
+        "Sentence": "The food is terrible and overall, I would have to say avoid at all costs.", 
+        "CatAndPolarity": {
+            "Cat": [
+                "food"
+            ], 
+            "Polarity": [
+                "negative"
+            ]
+        }
+    }, 
+    "134": {
+        "Sentence": "The food is prepared quickly and efficiently.", 
+        "CatAndPolarity": {
+            "Cat": [
+                "food"
+            ], 
+            "Polarity": [
+                "positive"
+            ]
+        }
+    }, 
+    "2708": {
+        "Sentence": "The food is fresh, delicious, and reasonably priced.", 
+        "CatAndPolarity": {
+            "Cat": [
+                "food", 
+                "price"
+            ], 
+            "Polarity": [
+                "positive", 
+                "positive"
+            ]
+        }
+    }, 
+    "1455": {
+        "Sentence": "This is my favorite Italian restaurant in all of New York City.", 
+        "CatAndPolarity": {
+            "Cat": [
+                "anecdotes/miscellaneous"
+            ], 
+            "Polarity": [
+                "positive"
+            ]
+        }
+    }, 
+    "2591": {
+        "Sentence": "Anyway, this is the last time I cross the williamsburg.", 
+        "CatAndPolarity": {
+            "Cat": [
+                "anecdotes/miscellaneous"
+            ], 
+            "Polarity": [
+                "negative"
+            ]
+        }
+    }, 
+    "1593": {
+        "Sentence": "I am bringing my whole family back next time.", 
+        "CatAndPolarity": {
+            "Cat": [
+                "anecdotes/miscellaneous"
+            ], 
+            "Polarity": [
+                "positive"
+            ]
+        }
+    }, 
+    "1769": {
+        "Sentence": "Love YUKA.", 
+        "CatAndPolarity": {
+            "Cat": [
+                "anecdotes/miscellaneous"
+            ], 
+            "Polarity": [
+                "positive"
+            ]
+        }
+    }, 
+    "3575": {
+        "Sentence": "As we were leaving, the couple standing by the door said to another waiter, we're not in a hurry.", 
+        "CatAndPolarity": {
+            "Cat": [
+                "anecdotes/miscellaneous"
+            ], 
+            "Polarity": [
+                "neutral"
+            ]
+        }
+    }, 
+    "1105": {
+        "Sentence": "I have been coming to this neighborhood spot for years.", 
+        "CatAndPolarity": {
+            "Cat": [
+                "anecdotes/miscellaneous"
+            ], 
+            "Polarity": [
+                "neutral"
+            ]
+        }
+    }, 
+    "2575": {
+        "Sentence": "We will be back.", 
+        "CatAndPolarity": {
+            "Cat": [
+                "anecdotes/miscellaneous"
+            ], 
+            "Polarity": [
+                "positive"
+            ]
+        }
+    }, 
+    "742": {
+        "Sentence": "The outdoor atmosphere of sitting on the sidewalk watching the world go by 50 feet away on 6th avenue on a cool evening was wonderful.", 
+        "CatAndPolarity": {
+            "Cat": [
+                "ambience"
+            ], 
+            "Polarity": [
+                "positive"
+            ]
+        }
+    }, 
+    "1471": {
+        "Sentence": "A large is $20, and toppings are about $3 each.", 
+        "CatAndPolarity": {
+            "Cat": [
+                "price"
+            ], 
+            "Polarity": [
+                "neutral"
+            ]
+        }
+    }, 
+    "1656": {
+        "Sentence": "The spicy tuna and salmon are the best we've ever had.", 
+        "CatAndPolarity": {
+            "Cat": [
+                "food"
+            ], 
+            "Polarity": [
+                "positive"
+            ]
+        }
+    }, 
+    "2769": {
+        "Sentence": "A guaranteeed delight!", 
+        "CatAndPolarity": {
+            "Cat": [
+                "anecdotes/miscellaneous"
+            ], 
+            "Polarity": [
+                "positive"
+            ]
+        }
+    }, 
+    "3681": {
+        "Sentence": "The food was very good, a great deal, and the place its self was great.", 
+        "CatAndPolarity": {
+            "Cat": [
+                "food", 
+                "ambience", 
+                "price"
+            ], 
+            "Polarity": [
+                "positive", 
+                "positive", 
+                "positive"
+            ]
+        }
+    }, 
+    "2205": {
+        "Sentence": "The food is usually good but it certainly isn't a relaxing place to go.", 
+        "CatAndPolarity": {
+            "Cat": [
+                "food", 
+                "ambience"
+            ], 
+            "Polarity": [
+                "positive", 
+                "negative"
+            ]
+        }
+    }, 
+    "1159": {
+        "Sentence": "After dinner, take your date to the HUGE dance floor, probably one of the biggest you'll see in NY.", 
+        "CatAndPolarity": {
+            "Cat": [
+                "ambience"
+            ], 
+            "Polarity": [
+                "positive"
+            ]
+        }
+    }, 
+    "628": {
+        "Sentence": "The server was really cool and served us our food and drinks with a smile.", 
+        "CatAndPolarity": {
+            "Cat": [
+                "service"
+            ], 
+            "Polarity": [
+                "positive"
+            ]
+        }
+    }, 
+    "2912": {
+        "Sentence": "The dishes offered were unique, very tasty and fresh from the lamb sausages, sardines with biscuits, large whole shrimp to the amazing pistachio ice cream (the best and freshest I've ever had).", 
+        "CatAndPolarity": {
+            "Cat": [
+                "food"
+            ], 
+            "Polarity": [
+                "positive"
+            ]
+        }
+    }, 
+    "3188": {
+        "Sentence": "Went there for an office lunch.", 
+        "CatAndPolarity": {
+            "Cat": [
+                "anecdotes/miscellaneous"
+            ], 
+            "Polarity": [
+                "neutral"
+            ]
+        }
+    }, 
+    "3041": {
+        "Sentence": "We've only eaten in the restaurant once, but we have ordered many times for dinner.", 
+        "CatAndPolarity": {
+            "Cat": [
+                "anecdotes/miscellaneous"
+            ], 
+            "Polarity": [
+                "neutral"
+            ]
+        }
+    }
+}
