@@ -1,0 +1,3 @@
+java -cp ./A.jar absa15.Do Validate ABSA15_Hotels_Test.xml ABSA15Mod.xsd hote B
+java -cp ./A.jar absa15.Do Validate ABSA15_Laptops_Test.xml ABSA15Mod.xsd lapt B
+java -cp ./A.jar absa15.Do Validate ABSA15_Restaurants_Test.xml ABSA15Mod.xsd rest B
