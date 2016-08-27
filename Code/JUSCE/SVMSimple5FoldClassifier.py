@@ -25,8 +25,8 @@ def GetYFromStringLabels (Labels):
             Y.append(0)
     return Y
 
-Samples = [' ## '.join (l.strip().split(' ## ')[:-1]) for l in open ('../Data/JUSCEFeats.txt').xreadlines()]
-Labels = [l.strip().split(';')[-1] for l in open ('../Data/RestAspCatABSA.csv')]
+Samples = [' ## '.join (l.strip().split(' ## ')[:-1]) for l in open ('../../Data/JUSCEFeats.txt').xreadlines()]
+Labels = [l.strip().split(';')[-1] for l in open ('../../Data/RestAspCatABSA.csv')]
 Y = GetYFromStringLabels(Labels)
 print 'loaded {} samples'.format(len(Samples))
 print 'Label dist: ', Counter(Y)

@@ -71,8 +71,8 @@ def GetListOfDict (X):
     # raw_input()
     return X_OP
 
-X = [l.strip().split() for l in open ('../Data/JUSCEFeats.txt').xreadlines()]
-Y = [[str(l.strip().split(';')[-1])] for l in open ('../Data/RestAspCatABSA.csv')]
+X = [l.strip().split() for l in open ('../../Data/JUSCEFeats.txt').xreadlines()]
+Y = [[str(l.strip().split(';')[-1])] for l in open ('../../Data/RestAspCatABSA.csv')]
 print 'loaded {} samples and {} labels'.format(len(X), len (Y))
 
 

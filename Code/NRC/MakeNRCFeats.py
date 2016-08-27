@@ -141,9 +141,9 @@ def GetAllNRCFeats (Sent, SentIndex, Cat):
 
 def Main ():
     T0 = time()
-    Sentences = [';'.join(l.strip().split(';')[:-2]) for l in open ('../RestAspCatABSA.csv').xreadlines()]#[:20]
-    Cat = [l.strip().split(';')[-2] for l in open ('../RestAspCatABSA.csv').xreadlines()]
-    Label = [l.strip().split(';')[-1] for l in open ('../RestAspCatABSA.csv').xreadlines()]
+    Sentences = [';'.join(l.strip().split(';')[:-2]) for l in open ('../../Data/RestAspCatABSA.csv').xreadlines()]#[:20]
+    Cat = [l.strip().split(';')[-2] for l in open ('../../Data/RestAspCatABSA.csv').xreadlines()]
+    Label = [l.strip().split(';')[-1] for l in open ('../../Data/RestAspCatABSA.csv').xreadlines()]
     # AllFeatsExpSentences = []
     # for SentIndex, Sent in enumerate(Sentences):
     #     AllFeatsExpSentences.append (GetAllNRCFeats(Sent, SentIndex, Cat))

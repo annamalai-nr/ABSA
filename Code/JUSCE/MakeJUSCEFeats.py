@@ -70,8 +70,8 @@ def GetJUSCEFeatsFromSent (Sent, Index):
     except:
         return '','',''
 
-AllRevSents = [';'.join(l.strip().split(';')[:-2]) for l in open ('../Data/RestAspCatABSA.csv')]#[:5]
-Cats = ['cat_'+l.strip().split(';')[-2] for l in open ('../Data/RestAspCatABSA.csv')]#[:5]
+AllRevSents = [';'.join(l.strip().split(';')[:-2]) for l in open ('../../Data/RestAspCatABSA.csv')]#[:5]
+Cats = ['cat_'+l.strip().split(';')[-2] for l in open ('../../Data/RestAspCatABSA.csv')]#[:5]
 Delim = ['##' for _ in xrange(len (Cats))]
 
 

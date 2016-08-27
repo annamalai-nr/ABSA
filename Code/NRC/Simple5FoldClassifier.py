@@ -40,8 +40,8 @@ def PerformFeatAnalysis (Classifier, X_train, Y, Vocab):
     raw_input()
 
 StemmedLexicons = LoadStemmedLex()
-Lines = [l.strip() for l in open ('../Data/AllNRCFeatsRestAspCatABSA.txt').xreadlines()]
-Sentences = [''.join(l.strip().split(';')[:-2]) for l in open ('../Data/RestAspCatABSA.csv').xreadlines()]
+Lines = [l.strip() for l in open ('../../Data/AllNRCFeatsRestAspCatABSA.txt').xreadlines()]
+Sentences = [''.join(l.strip().split(';')[:-2]) for l in open ('../../Data/RestAspCatABSA.csv').xreadlines()]
 LexFeats = [GetLexFeats(Sent, StemmedLexicons) for Sent in Sentences]
 LexFeats = np.array (LexFeats)
 LexFeats = csr_matrix (LexFeats)

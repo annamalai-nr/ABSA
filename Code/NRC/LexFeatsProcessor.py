@@ -12,11 +12,11 @@ def LoadStemLexWord (PosFName, NegFName):
     return Pos, Neg
 
 def LoadStemmedLex ():
-    HuLiu = LoadStemLexWord ('../Lex/HuAndLiu/HuLiuPositive.txt', '../Lex/HuAndLiu/HuLiuNegative.txt')
-    Nrc = LoadStemLexWord ('../Lex/NRC-Emotion-Lexicon-v0.92/NRCEmotionsPositive.txt',
-                                    '../Lex/NRC-Emotion-Lexicon-v0.92/NRCEmotionsNegative.txt')
-    Subj = LoadStemLexWord ('../Lex/subjectivity_clues_hltemnlp05/SubjPositive.txt',
-                                  '../Lex/subjectivity_clues_hltemnlp05/SubjNegative.txt')
+    HuLiu = LoadStemLexWord ('../../Lex/HuAndLiu/HuLiuPositive.txt', '../../Lex/HuAndLiu/HuLiuNegative.txt')
+    Nrc = LoadStemLexWord ('../../Lex/NRC-Emotion-Lexicon-v0.92/NRCEmotionsPositive.txt',
+                                    '../../Lex/NRC-Emotion-Lexicon-v0.92/NRCEmotionsNegative.txt')
+    Subj = LoadStemLexWord ('../../Lex/subjectivity_clues_hltemnlp05/SubjPositive.txt',
+                                  '../../Lex/subjectivity_clues_hltemnlp05/SubjNegative.txt')
     StemmedLexicons = [HuLiu, Nrc, Subj]
     return StemmedLexicons
 
