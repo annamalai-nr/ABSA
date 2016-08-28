@@ -9,10 +9,7 @@ from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_sc
 from sklearn import grid_search
 from random import randint
 from scipy.sparse import csr_matrix
-from scipy.sparse import hstack
-
-from LexFeatsProcessor import LoadStemmedLex, GetLexFeats
-from Simple5FoldClassifier import SpaceTokenizer, GetYFromStringLabels, GetLexFeats, GetXYVocab
+from SVMSimple5FoldClassifier import GetXYVocab
 from copy import deepcopy
 from scipy.sparse import csr_matrix
 
@@ -56,7 +53,7 @@ def AnalyseSampleFeats(X, Y, Classifier, Vocab, Sentences):
         FeatsTimesWAndVocab.reverse()
 
         print '*'*80
-        print 'Sentence: {},    actual label:{},    pred label: {} '.format(Sent, Y[Index], PredLabel)
+        print 'Sentence: {}    actual label:{},    pred label: {} '.format(Sent, Y[Index], PredLabel)
         print '-' * 80
         print 'Top 20 feats: '
         pprint (FeatsTimesWAndVocab[:20])
@@ -66,7 +63,7 @@ def AnalyseSampleFeats(X, Y, Classifier, Vocab, Sentences):
 
 NumSamples = -1
 X, Y, Vocab = GetXYVocab(NumSamples)
-Sentences = [l.strip() for l in open ('../../Data/RestAspCatABSA.csv').xreadlines()][:NumSamples]
+Sentences = [';'.join(l.strip().split(';')[:-1]) for l in open ('../../Data/RestAspCatABSA.csv').xreadlines()][:NumSamples]
 Classifier = LinearSVC(C=10)
 Classifier.fit(X, Y)
 Preds = Classifier.predict(X)
