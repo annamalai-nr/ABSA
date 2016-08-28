@@ -31,7 +31,7 @@ def GetXYVocab (NSamples = -1):
     Labels = [l.strip().split(';')[-1] for l in open ('../../Data/RestAspCatABSA.csv')][:NSamples]
     Y = GetYFromStringLabels(Labels)
     print 'loaded {} samples'.format(len(Samples))
-    print 'Label dist: ', Counter(Y)
+    print 'Label dist: ', pprint (dict(Counter(Y)))
     CountVecter = CountVectorizer(lowercase=False,dtype=np.float64,binary=False)#,max_df=0.95)
     X = CountVecter.fit_transform(Samples)
     X = Normalizer().fit_transform(X)
@@ -41,6 +41,7 @@ def GetXYVocab (NSamples = -1):
 
 
 def Main():
+    X, Y, Vocab = GetXYVocab()
     Accs = [];Ps = [];Rs = [];Fs = []
     for i in xrange (5):
         print 'run ',i+1

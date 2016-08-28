@@ -1,14 +1,7 @@
-import os, sys, json, numpy as np
-from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
-from sklearn.preprocessing import Normalizer
+import numpy as np
 from sklearn.svm import LinearSVC
 from pprint import pprint
-from sklearn.cross_validation import train_test_split
-from collections import Counter
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, classification_report
-from sklearn import grid_search
-from random import randint
-from scipy.sparse import csr_matrix
 from SVMSimple5FoldClassifier import GetXYVocab
 from copy import deepcopy
 from scipy.sparse import csr_matrix

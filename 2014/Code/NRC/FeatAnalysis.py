@@ -1,18 +1,8 @@
-import os, sys, json, numpy as np
-from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
-from sklearn.preprocessing import Normalizer
+import numpy as np
 from sklearn.svm import LinearSVC
 from pprint import pprint
-from sklearn.cross_validation import train_test_split
-from collections import Counter
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, classification_report
-from sklearn import grid_search
-from random import randint
-from scipy.sparse import csr_matrix
-from scipy.sparse import hstack
-
-from LexFeatsProcessor import LoadStemmedLex, GetLexFeats
-from Simple5FoldClassifier import SpaceTokenizer, GetYFromStringLabels, GetLexFeats, GetXYVocab
+from Simple5FoldClassifier import GetXYVocab
 from copy import deepcopy
 from scipy.sparse import csr_matrix
 
@@ -43,20 +33,15 @@ def AnalyseSampleFeats(X, Y, Classifier, Vocab, Sentences):
         Sample = X[Index,:]
         PredLabel = Classifier.predict(Sample)[0]
         ChosenW = csr_matrix(W[PredLabel, :])
-        # print ChosenW.shape
-        # print Sample.shape
-        # raw_input()
         FeatsTimesW = ChosenW.multiply(Sample)
         FeatsTimesW = FeatsTimesW.todense().T.tolist()
         FeatsTimesW = [Val for List in FeatsTimesW for Val in List]
-        # print len(FeatsTimesW)
-        # raw_input()
         FeatsTimesWAndVocab = zip(FeatsTimesW,Vocab)
         FeatsTimesWAndVocab.sort()
         FeatsTimesWAndVocab.reverse()
 
         print '*'*80
-        print 'Sentence: {},    actual label:{},    pred label: {} '.format(Sent, Y[Index], PredLabel)
+        print 'Sentence: {}    actual label:{},    pred label: {} '.format(Sent, Y[Index], PredLabel)
         print '-' * 80
         print 'Top 20 feats: '
         pprint (FeatsTimesWAndVocab[:20])
