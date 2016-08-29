@@ -8,6 +8,8 @@ def ScaleAllSentenceTensors ():
     return None
 
 ROOT = 'ROOT'
+ParStr = 'Root'
+GrandPar = ''
 
 def GetLabelsUniqueIndex (NodePosLabel, Ht, NodeNxLabels):
     NodeLabelsInSameGt = [Label for Label in NodeNxLabels if int(Label.split('_')[0]) == Ht and Label.split('_')[1] == NodePosLabel]
@@ -16,50 +18,62 @@ def GetLabelsUniqueIndex (NodePosLabel, Ht, NodeNxLabels):
 def GetNodeNxLabel (NodePosLabel, Ht, NodeNxLabels):
     return str(Ht)+'_'+str(NodePosLabel)+'_'+ str(GetLabelsUniqueIndex (NodePosLabel, Ht, NodeNxLabels))
 
-def getNodes(TreeBeginningAtRoot, NodeNxLabels = []):
+def getNodes(TreeBeginningAtRoot, NodeNxLabels = [], NxEdges = []):
+    global ParStr, GrandPar
     for Node in TreeBeginningAtRoot:
         if type(Node) is nltk.Tree:
             NodePosLabel = Node.label();Ht = Node.height()
             NodeNxLab = GetNodeNxLabel (NodePosLabel, Ht, NodeNxLabels)
             NodeNxLabels.append(NodeNxLab)
             # print "Label: ",NodeNxLab
+            Edge = (ParStr, NodeNxLab)
+            NxEdges.append(Edge)
+            GrandPar = ParStr
+            ParStr = NodeNxLab
             getNodes(Node, NodeNxLabels)
+
         else:
             NodePosLabel = Node; Ht = 1
             NodeNxLab = GetNodeNxLabel (NodePosLabel, Ht, NodeNxLabels)
             NodeNxLabels.append(NodeNxLab)
             # print "Label: ", NodeNxLab
-    return NodeNxLabels
+            Edge = (ParStr, NodeNxLab)
+            NxEdges.append(Edge)
+            ParStr = GrandPar
+    return NodeNxLabels, NxEdges
 
-# def getEdges(TreeBeginningAtRoot, NodeNxLabels = [], NodeNxEdges = []):
-#     for Node in TreeBeginningAtRoot:
-#         if type(Node) is nltk.Tree:
-#             NodePosLabel = Node.label();Ht = Node.height()
-#             ParNodeNxLab = GetNodeNxLabel (NodePosLabel, Ht, NodeNxLabels)
-#             NodeNxLabels.append(ParNodeNxLab)
-#             for ChildNode in Node.child ():
-#                 if type(ChildNode) is nltk.Tree:
-#                     ChildNodePosLabel = ChildNode.label()
-#                     ChildNodeHt = Ht - 1
-#                     ChildNodeNxLab = GetNodeNxLabel(ChildNodePosLabel, ChildNodeHt, NodeNxLabels)
-#                 else:
-#                     ChildNodePosLabel = ChildNode.label()
-#                     ChildNodeHt = 1
-#                     ChildNodeNxLab = GetNodeNxLabel(ChildNodePosLabel, ChildNodeHt, NodeNxLabels)
-#                 NodeNxEdges.append(ParNodeNxLab, ChildNodeNxLab)
-#     return NodeNxEdges
+
+def GetChildren(SubTree):
+    Children = []
+    for Node in SubTree:
+        if type(Node) is nltk.Tree:
+            Children.append(Node.label(), Node.height())
+        else:
+            Children.append(Node)
+    return Children
+
+
+def MyTest (TreeBeginningAtRoot):
+    for Node in TreeBeginningAtRoot:
+        if type(Node) is nltk.Tree:
+            print 'Node: {}, Ht: {}'.format(Node.label(), Node.height())
+            pprint (GetChildren(Node))
+
+        else:
+            print 'Node: {}, Ht: {}'.format(str(Node), '1')
 
 
 def MakeNxParseTrees (TreeStr):
     SentTree = Tree.fromstring (TreeStr)
-    NodeNxLabels = getNodes(SentTree)
-    # Edges = getEdges(SentTree)
-    pprint (NodeNxLabels)
-    raw_input()
-    # pprint(Edges)
-    # raw_input()
+    # NodeNxLabels, NxEdges = getNodes(SentTree)
+    # pprint (NodeNxLabels)
+    # pprint (NxEdges)
+    MyTest (SentTree)
     SentTree.pretty_print()
-    NxTree = nx.DiGraph()
+    # NxTree = nx.DiGraph()
+    # NxTree.add_edges_from(NxEdges)
+    # pprint (NxTree.edges())
+
 
 def Main ():
     CoreNLPParsedFName = '../../Data/CoreNLPParsed.json'
