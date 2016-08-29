@@ -8,3 +8,5 @@ For stanford corenlp python wrapper, https://github.com/dasmith/stanford-corenlp
 - Since this RPC invoations, CANNOT RUN PARALLEL requests!
 - Need to make sure 'jsonrpc.py' is in the same folder as 'corenlp.py'
 - import jsonrpc, that's it!
+
+for CRF: refer http://sklearn-crfsuite.readthedocs.io/en/latest/tutorial.html
