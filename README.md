@@ -9,4 +9,6 @@ For stanford corenlp python wrapper, https://github.com/dasmith/stanford-corenlp
 - Need to make sure 'jsonrpc.py' is in the same folder as 'corenlp.py'
 - import jsonrpc, that's it!
 
-for CRF: refer http://sklearn-crfsuite.readthedocs.io/en/latest/tutorial.html
+reference for CRF:
+- http://sklearn-crfsuite.readthedocs.io/en/latest/tutorial.html
+- http://stats.stackexchange.com/questions/38216/implementation-of-crf-in-python
