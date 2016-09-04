@@ -1,7 +1,11 @@
 Apsect Based Sentiment Analysis (ABSA) python implementations
-- SemEval 2014 solutions: NRC Canada, JUSCE 
+- SemEval 2014 solutions: 
+	- NRC Canada: http://www.aclweb.org/anthology/S14-2076
+	- JUSCE 
 - SemEval 2015 solutions: TBD
-- Deep Learning solutions for ABSA: CNN based impl by Wang & Liu (Stanford), LSTM based impl by Tang et. al.
+- Deep Learning solutions for ABSA: 
+	- CNN based impl by Wang & Liu (Stanford): https://cs224d.stanford.edu/reports/WangBo.pdf
+	- LSTM based impl by Tang et. al.: https://arxiv.org/pdf/1605.08900.pdf
 
 For stanford corenlp python wrapper, https://github.com/dasmith/stanford-corenlp-python is used
 - Need to run 'python corenlp.py' first. This starts a RPC service that is invoked by other python wrapped APIs. 
@@ -12,3 +16,8 @@ For stanford corenlp python wrapper, https://github.com/dasmith/stanford-corenlp
 reference for CRF:
 - http://sklearn-crfsuite.readthedocs.io/en/latest/tutorial.html
 - http://stats.stackexchange.com/questions/38216/implementation-of-crf-in-python
+
+reference for NLKT parse tree to NX graph:
+- http://stackoverflow.com/questions/25815002/nltk-tree-data-structure-finding-a-node-its-parent-or-children
+- http://stackoverflow.com/questions/29397460/extract-parent-and-child-node-from-python-tree
+- http://www.nltk.org/api/nltk.html#nltk.tree.ParentedTree
