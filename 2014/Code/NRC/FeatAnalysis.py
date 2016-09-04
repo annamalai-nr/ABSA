@@ -62,9 +62,10 @@ X = csr_matrix(X)
 TopN = 20
 TopNeg, TopNeu, TopPos, TopConf = AnalyseClassifierFeats (Classifier, Vocab, TopN)
 print '*'*80
-print 'top {} pos feats: {} '.format(TopN, TopPos);print '*'*80
-print 'top {} neg feats: {} '.format(TopN, TopNeg);print '*'*80
-print 'top {} neu feats: {} '.format(TopN, TopNeu);print '*'*80
-print 'top {} conf feats: {} '.format(TopN, TopConf);print '*'*80
+print 'top {} pos feats: '.format(TopN);pprint (TopPos);print '*'*80
+print 'top {} neg feats: '.format(TopN);pprint(TopNeg);print '*'*80
+print 'top {} neu feats: '.format(TopN);pprint(TopNeu);print '*'*80
+print 'top {} conf feats: '.format(TopN);pprint(TopConf);print '*'*80
+
 
 AnalyseSampleFeats(X, Y, Classifier, Vocab, Sentences)

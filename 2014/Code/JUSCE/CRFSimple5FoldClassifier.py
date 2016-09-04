@@ -132,9 +132,9 @@ for i in xrange (5):
     Preds = MakeListofListsAsList (Preds)
 
     Acc = accuracy_score(y_true = y_test, y_pred=Preds)
-    P = precision_score(y_true = y_test, y_pred=Preds)
-    R = recall_score(y_true = y_test, y_pred=Preds)
-    F = f1_score(y_true = y_test, y_pred=Preds)
+    P = precision_score(y_true = y_test, y_pred=Preds,average='macro')
+    R = recall_score(y_true = y_test, y_pred=Preds,average='macro')
+    F = f1_score(y_true = y_test, y_pred=Preds,average='macro')
     # print Acc,P,R,F
     print classification_report (y_test, Preds)
     Accs.append(Acc); Ps.append(P); Rs.append(R); Fs.append(F)
@@ -148,5 +148,5 @@ MeanP = np.mean(Ps); StdP = np.std(Ps)
 MeanR = np.mean(Rs); StdR = np.std(Rs)
 MeanF = np.mean(Fs); StdF = np.std(Fs)
 
-print 'Average Acc: {}, Prec: {}, Recall: {}, F1: {}'.format(MeanA, MeanP, MeanR, MeanF)
-print 'Std Acc: {}, Prec: {}, Recall: {}, F1: {}'.format(StdA, StdP, StdR, StdF)
+print 'Average Acc: {}, Prec: {}, Recall: {}, F1: {}'.format(round(MeanA*100,2), round(MeanP*100,2), round(MeanR*100,2), round(MeanF*100,2))
+print 'Std Acc: {}, Prec: {}, Recall: {}, F1: {}'.format(round(StdA*100,2), round(StdP*100,2), round(StdR*100,2), round(StdF*100,2))
