@@ -40,7 +40,6 @@ def GetSentenceToNxGraphDict (Sentences, CoreNLPParsedSents):
                     break
     return SentenceToNxGraphDict
 
-
 def GetHtAndUniqWordLabeledTokedSent (TokedSent):
     ReLabeledTokedSent = []
     for Index, W in enumerate(TokedSent):
@@ -49,53 +48,56 @@ def GetHtAndUniqWordLabeledTokedSent (TokedSent):
         ReLabeledTokedSent.append('1_'+W+'_'+str(CountOfWSoFar+1))
     return ReLabeledTokedSent
 
-def GetWeightsAccToAspTerms (TokedSent, ATerms, ParseTreeNxEdges):
-    ATerms = TokenizeWOStem(ATerms)
-    G = nx.Graph()
-    G.add_edges_from(ParseTreeNxEdges)
-    TreeHt = int(G.neighbors('ROOT')[0].split('_')[0])
-    TokedSent = GetHtAndUniqWordLabeledTokedSent (TokedSent)
-    ATerms = ['1_'+W+'_1' for W in ATerms]
-    UniformPVal = 1.0/len(ATerms)
-    WOrg = [UniformPVal if W in ATerms else 0 for W in TokedSent]
+def GetDistIJAndProbIJ (TokedSent, WOrg, TreeHt, G):
     DistIJs = {}
     ProbIJs = {}
     for IndexI, WordI in enumerate(TokedSent):
         for WordJ in TokedSent:
             if WordI == WordJ:
-                DistIJs[(WordI,WordJ)] = 0
-                ProbIJs[(WordI,WordJ)] = 1 + WOrg[IndexI]
+                DistIJs[(WordI, WordJ)] = 0
+                ProbIJs[(WordI, WordJ)] = 1 + WOrg[IndexI]
             else:
                 try:
                     ShortesPath = nx.shortest_path(G, WordI, WordJ)
-                    DistIJs[(WordI, WordJ)] = len(ShortesPath)-2
+                    DistIJs[(WordI, WordJ)] = len(ShortesPath) - 2
                 except:
                     print 'one of the words {} or {} is NOT present in parse tree' \
                           ', hence using maximum height of the tree as distance'.format(WordI, WordJ)
-                    DistIJs[(WordI, WordJ)] = TreeHt #make maximum height
-                Frac = float(DistIJs[(WordI, WordJ)]*DistIJs[(WordI, WordJ)])/(2*TreeHt)
-                ProbIJs[(WordI, WordJ)] = WOrg[IndexI] * math.exp (-Frac)
-    WMod = []
-    for W in TokedSent:
-        ValsToAdd = sum([ProbIJs[(WordI, WordJ)] for WordI, WordJ in ProbIJs.keys() if W == WordJ])
-        WMod.append(ValsToAdd)
-    pprint (WOrg)
-    pprint (WMod)
+                    DistIJs[(WordI, WordJ)] = TreeHt  # make maximum height
+                Frac = float(DistIJs[(WordI, WordJ)] * DistIJs[(WordI, WordJ)]) / (2 * TreeHt)
+                ProbIJs[(WordI, WordJ)] = WOrg[IndexI] * math.exp(-Frac)
+    return DistIJs, ProbIJs
 
+def GetHtAndUniqWordLabeledAspTerm (ATerms, TokedSent):
+    ATermsWithHtAnduniqCount = []
+    for AT in ATerms:
+        for W in TokedSent:
+            if AT in W:
+                ATermsWithHtAnduniqCount.append(W)
+    return ATermsWithHtAnduniqCount
+
+
+def GetWeightsAccToAspTerms (TokedSent, ATerms, ParseTreeNxEdges):
+    ATerms = TokenizeWOStem(ATerms)
+    G = nx.Graph();G.add_edges_from(ParseTreeNxEdges)
+    TreeHt = int(G.neighbors('ROOT')[0].split('_')[0])
+    TokedSent = GetHtAndUniqWordLabeledTokedSent (TokedSent)
+    ATerms = GetHtAndUniqWordLabeledAspTerm (ATerms, TokedSent)
+    UniformPVal = 1.0/len(ATerms)
+    WOrg = [UniformPVal if W in ATerms else 0 for W in TokedSent]
+    DistIJs, ProbIJs = GetDistIJAndProbIJ(TokedSent, WOrg, TreeHt, G)
+    WMod = [sum([ProbIJs[(WordI, WordJ)] for WordI, WordJ in ProbIJs.keys() if W == WordJ]) for W in TokedSent]
+    del DistIJs, ProbIJs, G
+    # pprint (WOrg)
+    # pprint ([round(elem, 2) for elem in WMod])
     WModMean = float(np.array (WMod).mean())
     WMod = [X/WModMean for X in WMod]
-
-    pprint (WMod)
-
-    MinVal = min (WMod)
-    MaxVal = max (WMod)
-    ToMin = 0.7
-    ToMax = 1.3
-    ToDiff = ToMax - ToMin
+    pprint ([round(elem, 2) for elem in WMod])
+    MinVal = min (WMod); MaxVal = max (WMod); ToMin = 0.7; ToMax = 1.3;ToDiff = ToMax - ToMin
     WModNormalized = [(((ToDiff)*(X-MinVal))/(MaxVal-MinVal))+ToMin for X in WMod]
-    pprint (WModNormalized)
+    # pprint ([round(elem, 2) for elem in WModNormalized])
 
-
+    return WModNormalized
 
 
 
