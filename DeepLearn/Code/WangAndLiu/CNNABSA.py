@@ -66,8 +66,13 @@ def GetWeightsAccToAspTerms (TokedSent, ATerms, ParseTreeNxEdges):
                 DistIJs[(WordI,WordJ)] = 0
                 ProbIJs[(WordI,WordJ)] = 1 + WOrg[IndexI]
             else:
-                ShortesPath = nx.shortest_path(G, WordI, WordJ)
-                DistIJs[(WordI, WordJ)] = len(ShortesPath)
+                try:
+                    ShortesPath = nx.shortest_path(G, WordI, WordJ)
+                    DistIJs[(WordI, WordJ)] = len(ShortesPath)-2
+                except:
+                    print 'one of the words {} or {} is NOT present in parse tree' \
+                          ', hence using maximum height of the tree as distance'.format(WordI, WordJ)
+                    DistIJs[(WordI, WordJ)] = TreeHt #make maximum height
                 Frac = float(DistIJs[(WordI, WordJ)]*DistIJs[(WordI, WordJ)])/(2*TreeHt)
                 ProbIJs[(WordI, WordJ)] = WOrg[IndexI] * math.exp (-Frac)
     WMod = []
@@ -77,12 +82,17 @@ def GetWeightsAccToAspTerms (TokedSent, ATerms, ParseTreeNxEdges):
     pprint (WOrg)
     pprint (WMod)
 
+    WModMean = float(np.array (WMod).mean())
+    WMod = [X/WModMean for X in WMod]
+
+    pprint (WMod)
+
     MinVal = min (WMod)
     MaxVal = max (WMod)
     ToMin = 0.7
     ToMax = 1.3
     ToDiff = ToMax - ToMin
-    WModNormalized = [(((ToDiff)*(X-MinVal))/(MaxVal-MinVal)) for X in WMod]
+    WModNormalized = [(((ToDiff)*(X-MinVal))/(MaxVal-MinVal))+ToMin for X in WMod]
     pprint (WModNormalized)
 
 
