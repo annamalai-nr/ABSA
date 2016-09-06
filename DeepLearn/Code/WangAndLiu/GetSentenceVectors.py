@@ -23,6 +23,21 @@ def GetSentenceTensor (Tokens, SentMaxLen, W2VDims, W2VModel, Avg= False):
 
 
 
+def GetScaledSentenceTensor (UnScaledSentenceTensor, ATermWts):
+    PadZeroWts = UnScaledSentenceTensor.shape[0] - len (ATermWts)
+    ATermWts = ATermWts + [0.0 for _ in xrange(PadZeroWts)]
+    ATermWts = np.array (ATermWts)
+    ATermWts = ATermWts.reshape (UnScaledSentenceTensor.shape[0],1)
+    # print ATermWts.shape
+    # print UnScaledSentenceTensor.shape
+    # pprint (UnScaledSentenceTensor)
+    ScaledSentenceTensor = ATermWts * UnScaledSentenceTensor
+    # pprint (ScaledSentenceTensor)
+    # raw_input()
+    return ScaledSentenceTensor
+
+
+
 def GetAllSentenceTensors(TokenizedSentences, SentMaxLen, W2VModel, W2VDims=300):
     print (len (TokenizedSentences))
     print SentMaxLen

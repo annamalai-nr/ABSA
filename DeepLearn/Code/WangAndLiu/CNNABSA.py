@@ -4,9 +4,9 @@ import numpy as np
 import networkx as nx
 from time import time
 from pprint import pprint
-from GetSentenceVectors import GetAllSentenceTensors, GetSentenceTensor
-from ScaleTensors import ScaleAllSentenceTensors
+from GetSentenceVectors import GetSentenceTensor, GetScaledSentenceTensor
 import math
+from copy import deepcopy
 
 def LoadGoogleNewsW2VModel (ModelFName):
     T0 = time()
@@ -35,7 +35,8 @@ def GetSentenceToNxGraphDict (Sentences, CoreNLPParsedSents):
             for SentCoreNLPDict in SentCoreNLPInfoList['sentences']:
                 CoreNLPSent = SentCoreNLPDict['text']
                 if CoreNLPSent == S:
-                    SentenceToNxGraphDict[S] = SentCoreNLPDict['NxGraphEdges']
+                    G = nx.Graph();G.add_edges_from(SentCoreNLPDict['NxGraphEdges'])
+                    SentenceToNxGraphDict[S] = deepcopy(G)
                     SentProcessed = True
                     break
     return SentenceToNxGraphDict
@@ -61,8 +62,8 @@ def GetDistIJAndProbIJ (TokedSent, WOrg, TreeHt, G):
                     ShortesPath = nx.shortest_path(G, WordI, WordJ)
                     DistIJs[(WordI, WordJ)] = len(ShortesPath) - 2
                 except:
-                    print 'one of the words {} or {} is NOT present in parse tree' \
-                          ', hence using maximum height of the tree as distance'.format(WordI, WordJ)
+                    # print 'one of the words {} or {} is NOT present in parse tree' \
+                    #       ', hence using maximum height of the tree as distance'.format(WordI, WordJ)
                     DistIJs[(WordI, WordJ)] = TreeHt  # make maximum height
                 Frac = float(DistIJs[(WordI, WordJ)] * DistIJs[(WordI, WordJ)]) / (2 * TreeHt)
                 ProbIJs[(WordI, WordJ)] = WOrg[IndexI] * math.exp(-Frac)
@@ -76,10 +77,9 @@ def GetHtAndUniqWordLabeledAspTerm (ATerms, TokedSent):
                 ATermsWithHtAnduniqCount.append(W)
     return ATermsWithHtAnduniqCount
 
-
-def GetWeightsAccToAspTerms (TokedSent, ATerms, ParseTreeNxEdges):
+def GetWeightsAccToAspTerms (TokedSent, ATerms, ParseTreeNxGraph):
     ATerms = TokenizeWOStem(ATerms)
-    G = nx.Graph();G.add_edges_from(ParseTreeNxEdges)
+    G = ParseTreeNxGraph
     TreeHt = int(G.neighbors('ROOT')[0].split('_')[0])
     TokedSent = GetHtAndUniqWordLabeledTokedSent (TokedSent)
     ATerms = GetHtAndUniqWordLabeledAspTerm (ATerms, TokedSent)
@@ -87,18 +87,16 @@ def GetWeightsAccToAspTerms (TokedSent, ATerms, ParseTreeNxEdges):
     WOrg = [UniformPVal if W in ATerms else 0 for W in TokedSent]
     DistIJs, ProbIJs = GetDistIJAndProbIJ(TokedSent, WOrg, TreeHt, G)
     WMod = [sum([ProbIJs[(WordI, WordJ)] for WordI, WordJ in ProbIJs.keys() if W == WordJ]) for W in TokedSent]
-    del DistIJs, ProbIJs, G
+    del DistIJs, ProbIJs
     # pprint (WOrg)
     # pprint ([round(elem, 2) for elem in WMod])
     WModMean = float(np.array (WMod).mean())
     WMod = [X/WModMean for X in WMod]
-    pprint ([round(elem, 2) for elem in WMod])
+    # pprint ([round(elem, 2) for elem in WMod])
     MinVal = min (WMod); MaxVal = max (WMod); ToMin = 0.7; ToMax = 1.3;ToDiff = ToMax - ToMin
     WModNormalized = [(((ToDiff)*(X-MinVal))/(MaxVal-MinVal))+ToMin for X in WMod]
     # pprint ([round(elem, 2) for elem in WModNormalized])
-
     return WModNormalized
-
 
 
 def Main():
@@ -127,22 +125,50 @@ def Main():
     print 'max sentence lenght found across all sentences (size of sentence tensor): ', SentMaxLen
 
     # 3 w2v model load
-    # GoogleNewsW2VModelFName = '../../../Embeddings/GoolgeNews/GoogleNews-vectors-negative300.bin'
-    # W2VModel = LoadGoogleNewsW2VModel(GoogleNewsW2VModelFName)
-    # W2VDims = 300
+    GoogleNewsW2VModelFName = '../../../Embeddings/GoolgeNews/GoogleNews-vectors-negative300.bin'
+    W2VModel = LoadGoogleNewsW2VModel(GoogleNewsW2VModelFName)
+    W2VDims = 300
 
     # UnscaledSentenceTensors = GetAllSentenceTensors(TokenizedSentences, SentMaxLen, W2VModel, W2VDims)
     # print 'obtained {} sentence 2D tensors'.format(len(UnscaledSentenceTensors))
 
+    UnScaledX = []
+    ScaledX = []
+    Y = []
     for SentIndex, TokedSent in enumerate(TokenizedSentences):
+        T0 = time()
         ATerms = AspectTerms[SentIndex]
         Sent = Sentences[SentIndex]
-        ParseTreeNxEdges = SentenceToNxGraphDict[Sent]
-        ATermWts = GetWeightsAccToAspTerms (TokedSent, ATerms, ParseTreeNxEdges)
-        # UnScaledSentenceTensor = GetSentenceTensor (TokedSent, SentMaxLen, W2VDims, W2VModel, Avg= False)
+        try:
+            ParseTreeNxGraph = SentenceToNxGraphDict[Sent]
+            ATermWts = GetWeightsAccToAspTerms (TokedSent, ATerms, ParseTreeNxGraph)
+        except:
+            ATermWts = [1.0 for W in TokedSent]
 
-        # ScaledSentenceVec = GetScaledSentenceTensor (UnScaledSentenceVec, AspectTerms)
+        UnScaledSentenceTensor = GetSentenceTensor (TokedSent, SentMaxLen, W2VDims, W2VModel, Avg= False)
+        ScaledSentenceTensor = GetScaledSentenceTensor (UnScaledSentenceTensor, ATermWts)
 
+        #for save
+        OrgDims = UnScaledSentenceTensor.shape[0]*UnScaledSentenceTensor.shape[1]
+        UnScaledSentenceTensor = UnScaledSentenceTensor.reshape(1,OrgDims)
+        ScaledSentenceTensor = ScaledSentenceTensor.reshape(1,OrgDims)
+        UnScaledX.append(UnScaledSentenceTensor)
+        ScaledX.append(ScaledSentenceTensor)
+        Y.append(Labels[SentIndex])
+
+        print 'proced sent: {} in {} sec.'.format(SentIndex, time()-T0)
+
+    UnScaledX = np.array (UnScaledX)
+    ScaledX = np.array(ScaledX)
+    CurShape = UnScaledX.shape
+    UnScaledX = UnScaledX.reshape(CurShape[0],CurShape[-1])
+    ScaledX = ScaledX.reshape(CurShape[0],CurShape[-1])
+
+    np.savetxt (fname='UnscaledX.txt',X = UnScaledX)
+    np.savetxt (fname='ScaledX.txt',X = ScaledX)
+    with open('Y.txt', 'w') as FH:
+        for y in Y:
+            print>> FH, y
 
 if __name__ == '__main__':
     Main()
