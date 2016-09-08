@@ -21,3 +21,14 @@ reference for NLKT parse tree to NX graph:
 - http://stackoverflow.com/questions/25815002/nltk-tree-data-structure-finding-a-node-its-parent-or-children
 - http://stackoverflow.com/questions/29397460/extract-parent-and-child-node-from-python-tree
 - http://www.nltk.org/api/nltk.html#nltk.tree.ParentedTree
+
+Aspect Location (May be TBD):
+- http://alt.qcri.org/semeval2014/cdrom/pdf/SemEval059.pdf
+- http://alt.qcri.org/semeval2014/cdrom/pdf/SemEval075.pdf
+- http://alt.qcri.org/semeval2014/cdrom/pdf/SemEval076.pdf
+- http://alt.qcri.org/semeval2014/cdrom/pdf/SemEval092.pdf
+- http://alt.qcri.org/semeval2014/cdrom/pdf/SemEval099.pdf
+- http://alt.qcri.org/semeval2014/cdrom/pdf/SemEval101.pdf
+
+- clustering paper: http://www.aclweb.org/anthology/N/N16/N16-1093.pdf
+
