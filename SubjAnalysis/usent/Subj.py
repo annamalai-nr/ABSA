@@ -6,22 +6,22 @@ from pprint import pprint
 
 def ProcessSingleFile (FName, MailNumber):
     T0 = time()
-    # try:
-    EmailText = [open(FName).read()]
-    SentAnalyzer = Sentiment()
-    Res = SentAnalyzer.analyze(EmailText)
-    pprint (Res)
-    SentSentimentPol = zip(Res['sentences'],Res['sentiments'],Res['scores'])
-    SentSentimentPol = [ThreeTuple for ThreeTuple in SentSentimentPol if ThreeTuple[1] != 'neutral']
-    print 'processed email {} in {} sec'.format(MailNumber, round(time()-T0))
-    return SentSentimentPol
-    # except:
-    #     print 'failed to process email ', MailNumber
-    #     return []
+    try:
+        EmailText = [open(FName).read()]
+        SentAnalyzer = Sentiment()
+        Res = SentAnalyzer.analyze(EmailText)
+        pprint (Res)
+        SentSentimentPol = zip(Res['sentences'],Res['sentiments'],Res['scores'])
+        SentSentimentPol = [ThreeTuple for ThreeTuple in SentSentimentPol if ThreeTuple[1] != 'neutral']
+        print 'processed email {} in {} sec'.format(MailNumber, round(time()-T0))
+        return SentSentimentPol
+    except:
+        print 'failed to process email ', MailNumber
+        return []
 
 
 SkillingDir = '/mnt/AnnaLaptop/Moscato/Datasets/enron_mails_dir/skilling-j/discussion_threads'
-SkillingFiles = [os.path.join (SkillingDir,F) for F in os.listdir(SkillingDir) if os.path.isfile(os.path.join (SkillingDir,F))][:-1]
+SkillingFiles = [os.path.join (SkillingDir,F) for F in os.listdir(SkillingDir) if os.path.isfile(os.path.join (SkillingDir,F))]
 SkillingFiles.sort()
 print 'found {} files from skilling inbox'.format (len(SkillingFiles))
 raw_input('hit any key to continue...')
