@@ -16,7 +16,7 @@ import sys
 import pickle 
 from terminal_colors import Tcolors
 from pb_classifiers import PbSubj
-
+from time import sleep
 class Bootstrapping:
     """
         Bootstrapping: Class performing the bootstrapping process for 
@@ -58,12 +58,23 @@ class Bootstrapping:
                                           ["TO","VB","TO"]]
                                 }
         self.filename = "stored/learned_patterns"
-        try:
-            self.learned_patterns = pickle.load(open(self.filename))
-            print Tcolors.ADD + Tcolors.OKBLUE + " Loaded existing pattern knowledge!" + Tcolors.ENDC 
-        except:
-            print Tcolors.ACT + Tcolors.RED + " Existing pattern knowledge not found." + Tcolors.ENDC
-            self.learned_patterns = {}
+        TryCnt = 0
+        while True:
+            try:
+                self.learned_patterns = pickle.load(open(self.filename))
+                print Tcolors.ADD + Tcolors.OKBLUE + " Loaded existing pattern knowledge!" + Tcolors.ENDC
+                break
+            except:
+                if TryCnt < 5:
+                    print 'raja sekar'
+                    # raw_input()
+                    TryCnt += 1
+                    sleep (2)
+                    continue
+                else:
+                    print Tcolors.ACT + Tcolors.RED + " Existing pattern knowledge not found." + Tcolors.ENDC
+                    self.learned_patterns = {}
+                    break
              
         # Part Of Speech Sequential Tagger (Unigram->Bigram->Trigram) 
         self.tagger = tagger

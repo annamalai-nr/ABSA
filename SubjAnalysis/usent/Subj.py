@@ -1,33 +1,44 @@
-import os
-import sys
-import nltk
-import pickle
-import string
-from nltk.stem.porter import PorterStemmer
+import os, json
+from sentiment import Sentiment
+from time import time
+from joblib import Parallel, delayed
 from pprint import pprint
-from my_sentiment import Sentiment
 
-
-def ProcessSingleFile (FName):
+def ProcessSingleFile (FName, MailNumber):
+    T0 = time()
+    # try:
     EmailText = [open(FName).read()]
-    # sent_detector = nltk.data.load('tokenizers/punkt/english.pickle')
-    # Sents = sent_detector.tokenize(Text.strip())
     SentAnalyzer = Sentiment()
-    # pprint (Sents)
-    Sents = [u'I feel great. She is horrible. Test is ok. This is ok!']
-    # Res = SentAnalyzer.analyze(Sents)
     Res = SentAnalyzer.analyze(EmailText)
-    # pprint (Sents)
-    # pprint (Res)
-    pprint (zip(Res['sentences'],Res['sentiments'], Res['scores']))
-    raw_input()
+    pprint (Res)
+    SentSentimentPol = zip(Res['sentences'],Res['sentiments'],Res['scores'])
+    SentSentimentPol = [ThreeTuple for ThreeTuple in SentSentimentPol if ThreeTuple[1] != 'neutral']
+    print 'processed email {} in {} sec'.format(MailNumber, round(time()-T0))
+    return SentSentimentPol
+    # except:
+    #     print 'failed to process email ', MailNumber
+    #     return []
 
 
-SkillingDir = '/home/annamalai/Moscato/Datasets/enron_mails_dir/skilling-j/inbox'
-SkillingFiles = [os.path.join (SkillingDir,F) for F in os.listdir(SkillingDir) if os.path.isfile(os.path.join (SkillingDir,F))]
+SkillingDir = '/mnt/AnnaLaptop/Moscato/Datasets/enron_mails_dir/skilling-j/discussion_threads'
+SkillingFiles = [os.path.join (SkillingDir,F) for F in os.listdir(SkillingDir) if os.path.isfile(os.path.join (SkillingDir,F))][:-1]
 SkillingFiles.sort()
 print 'found {} files from skilling inbox'.format (len(SkillingFiles))
-for F in SkillingFiles:
-    print F
-    ProcessSingleFile (F)
-    raw_input()
+raw_input('hit any key to continue...')
+
+T0 = time()
+EmailsSubjRes = Parallel(n_jobs=36)(delayed(ProcessSingleFile)(F, I) for I, F in enumerate(SkillingFiles))
+# EmailsSubjRes = []
+# for I, F in enumerate(SkillingFiles):
+#     EmailsSubjRes.append (ProcessSingleFile(F, I))
+#     raw_input()
+print 'processed emails in {} sec'.format(round(time()-T0))
+
+try:
+    Tmp = {os.path.basename(FName): EmailsSubjRes[FIndex] for FIndex, FName in enumerate(SkillingFiles)}
+    with open('SkillingEmails_Subj.json', 'w') as FH:
+        json.dump(obj=Tmp, fp=FH, indent=4)
+except:
+    Tmp = {os.path.basename(FName):unicode(str(EmailsSubjRes[FIndex]), errors='replace') for FIndex, FName in enumerate(SkillingFiles)}
+    with open('SkillingEmails_Subj.json', 'w') as FH:
+        json.dump(obj=Tmp, fp=FH, indent=4)
