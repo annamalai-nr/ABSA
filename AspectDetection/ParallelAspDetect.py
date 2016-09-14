@@ -40,6 +40,7 @@ print 'have to process {} json files from {}'.format(len(FilesToProcess), TgtFol
 raw_input('hit any key to proceed...')
 
 for FName in FilesToProcess:
+    raw_input('processing file: {} ... hit any key'.format(FName))
     with open (FName) as FH:
         SubjDict = json.load(fp=FH)
     Sents = [ThreeTup[0] for MailNum, Sentences in SubjDict.iteritems() for ThreeTup in Sentences]#[2:4]
