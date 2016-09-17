@@ -27,8 +27,7 @@ wordcloud = WordCloud(max_font_size=40, relative_scaling=.5).generate(text)
 plt.figure(dpi=600)
 plt.imshow(wordcloud)
 plt.axis("off")
-plt.show()
-# OpFName = FName.replace('.txt','_WC.png')
-# OpFName = FName.replace('.txt','_WC.png')
-# plt.savefig(OpFName, dpi=600,)
+# plt.show()
+OpFName = 'RandomEmailAspWC.png'
+plt.savefig(OpFName, dpi=600,)
 
