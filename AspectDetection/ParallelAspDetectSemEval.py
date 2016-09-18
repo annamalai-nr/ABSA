@@ -17,6 +17,7 @@ def ExecCmdLine (S, I, CleanPunc=True):
 
     try:
         JarFName = '/mnt/AnnaLaptop/Desktop/ABSA/AspectDetection/aspect_par1.jar'
+        # JarFName = '/home/annamalai/Desktop/ABSA/AspectDetection/aspect_par1.jar'
         Cmd = 'java -jar '+JarFName+' "'+S+'".'
         print 'executing command', Cmd
         ResString = commands.getstatusoutput(Cmd)
@@ -26,7 +27,8 @@ def ExecCmdLine (S, I, CleanPunc=True):
         Asp = Asp.split(',')
         Asp = [A.strip() for A in Asp]
         print 'processes sent {} in {} sec'.format(I, round(time()-T0,2))
-        # print Asp
+        print S
+        print Asp
         # raw_input()
         return Asp
 
@@ -34,23 +36,25 @@ def ExecCmdLine (S, I, CleanPunc=True):
         print 'unable to process sebt ', I
         return []
 
-TgtFolder = '/mnt/AnnaLaptop/Desktop/ABSA/SubjAnalysis/usent/ToDelSkillingSubjRes'
-FilesToProcess = [os.path.join(TgtFolder,F) for F in os.listdir(TgtFolder) if F.endswith('_Subj.json')]
-print 'have to process {} json files from {}'.format(len(FilesToProcess), TgtFolder)
-raw_input('hit any key to proceed...')
+IpFName = '/mnt/AnnaLaptop/Desktop/ABSA/2014/Data/LaptopAspTermDict.json'
+# IpFName = '/home/annamalai/Desktop/ABSA/2014/Data/RestAspTermDict.json'
+with open (IpFName) as FH:
+    GTSentAspTermDict = json.load(FH)
 
-for FName in FilesToProcess:
-    raw_input('processing file: {} ... hit any key'.format(FName))
-    with open (FName) as FH:
-        SubjDict = json.load(fp=FH)
-    Sents = [ThreeTup[0] for MailNum, Sentences in SubjDict.iteritems() for ThreeTup in Sentences]#[2:4]
-    print 'loaded {} subj sentences from {}'.format(len(Sents), FName)
+Sents = GTSentAspTermDict.keys()#[:10]
+print 'loaded {} sentences from {}'.format(len(Sents), IpFName)
+raw_input('hit any key to continue...')
 
-    # for I, S in enumerate(Sents):
-    #     ExecCmdLine (S,I)
+# AnkitSentAspTermDict = {Sent:[] for Sent in Sents}
+# for I, S in enumerate(Sents):
+#     AspTermList = ExecCmdLine (S,I)
+    # print S
+    # print AspTermList
+    # raw_input()
+    # AnkitSentAspTermDict[S] = AspTermList
 
-    AspPerSent = Parallel(n_jobs=36)(delayed(ExecCmdLine)(S, I) for I, S in enumerate(Sents))
-    ResTuple = zip (Sents, AspPerSent)
-    OpFName = FName.replace('.json', '_ApsPerSent.json')
-    with open (OpFName,'w') as FH:
-        json.dump(obj=ResTuple, fp=FH, indent=4)
+AspPerSent = Parallel(n_jobs=36)(delayed(ExecCmdLine)(S, I) for I, S in enumerate(Sents))
+AnkitSentAspTermDict = dict(zip (Sents, AspPerSent))
+OpFName = IpFName.replace('LaptopAspTermDict', 'AnkitCodeLaptopAspTermDict')
+with open (OpFName,'w') as FH:
+    json.dump(obj=AnkitSentAspTermDict, fp=FH, indent=4)
