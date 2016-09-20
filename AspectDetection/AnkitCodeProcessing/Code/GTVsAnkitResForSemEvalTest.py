@@ -1,8 +1,8 @@
 import os, json
 from pprint import pprint
 import numpy as np, re
-GTFName = '/home/annamalai/Desktop/ABSA/2014/Data/Restaurants_Test_Data_phaseB.xml.term-polarity.json'
-AnkitResFName = '/home/annamalai/Desktop/ABSA/2014/Data/AnkitCodeRestaurantAspTermDict_SemEvalTest.json'
+GTFName = '/home/annamalai/Desktop/ABSA/2014/Data/Laptops_Test_Data_phaseB.xml.term-polarity.json'
+AnkitResFName = '/home/annamalai/Desktop/ABSA/2014/Data/AnkitCodeLaptopAspTermDict_SemEvalTest.json'
 
 with open (GTFName) as FH:
     GTDict = json.load(FH)
@@ -62,5 +62,5 @@ print AllF.mean ()
 print AllP.mean()
 print AllR.mean()
 
-with open ('AnkitCodeRestaurantAspTermDict_SemEvalTest_AnkitVsGT.json','w') as FH:
+with open ('AnkitCodeLaptopAspTermDict_SemEvalTest_AnkitVsGT.json','w') as FH:
     json.dump(obj=AspsComparisonPerSent, fp=FH,indent=4)

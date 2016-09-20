@@ -3,6 +3,7 @@
 *swp
 .idea*
 *DS_Store
+*jar
 Embeddings
 Data
 DeepLearn/Code/WangAndLiu/*.txt
