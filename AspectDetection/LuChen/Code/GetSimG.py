@@ -17,7 +17,7 @@ for T in Terms:
     # print T
     ThisV = TermToVectDict[T]
     # print ThisV
-    SemanticSimVect = [np.dot(ThisV, TermToVectDict[OtherTerm].T) for OtherTerm in TermToVectDict]
+    SemanticSimVect = [np.dot(ThisV, TermToVectDict[OtherTerm].T) for OtherTerm in Terms]
     # pprint (SemanticSimVect)
     # print (len(SemanticSimVect))
     # raw_input()
@@ -27,5 +27,5 @@ SemanticSimMat = np.array(SemanticSimMat)
 
 print 'obtained termwise semantic sim mat of shape: {} from file: {}'.format(SemanticSimMat.shape, FName)
 OpFName = FName.replace('AspTermsVects.json','SimG.txt')
-np.savetxt(fname=OpFName, X=SemanticSimMat)
+np.savetxt(fname=OpFName, X=SemanticSimMat, fmt='%.4f')
 print 'check ', OpFName
