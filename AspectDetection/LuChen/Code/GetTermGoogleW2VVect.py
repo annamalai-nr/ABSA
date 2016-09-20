@@ -14,21 +14,23 @@ def LoadGoogleNewsW2VModel (ModelFName):
     return W2VModel
 
 
-# FName = '/home/annamalai/Desktop/ABSA/AspectDetection/LuChen/DataAndGT/reviews_TV_AspTerms.txt'
-FName = sys.argv[1]
+FName = '/home/annamalai/Desktop/ABSA/AspectDetection/LuChen/DataAndGT/reviews_TV_AspTerms.txt'
+# FName = sys.argv[1]
 W2VModelFName = '/home/annamalai/Desktop/ABSA/Embeddings/GoolgeNews/GoogleNews-vectors-negative300.bin'
 
 Terms = [l.strip() for l in open (FName).xreadlines()]
 print 'loaded {} terms from {}'.format(len(Terms), FName)
 D = OrderedDict()
 W2VModel = LoadGoogleNewsW2VModel(W2VModelFName)
-
+#to load syn0norm
+W2VModel.most_similar('test','testing')
 for T in Terms:
     try:
-        Vec = W2VModel[T]
-        D[T] = Vec.tolist()
+        TIndex = W2VModel.vocab[T].index
     except:
-        pass
+        continue
+    Vec = W2VModel.syn0norm[TIndex]
+    D[T] = Vec.tolist()
 
 OpFName = FName.replace('AspTerms.txt','AspTermsVects.json')
 with open (OpFName,'w') as FH:
