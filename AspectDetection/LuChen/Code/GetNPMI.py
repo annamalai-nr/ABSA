@@ -3,9 +3,9 @@ from pprint import pprint
 import numpy as np
 from math import log
 
-AspTermsFName = '/home/annamalai/Desktop/ABSA/AspectDetection/LuChen/DataAndGT/reviews_TV_AspTermsAfterRemNonGooglew2v.txt'
-AspTermsDFFName = '/home/annamalai/Desktop/ABSA/AspectDetection/LuChen/DataAndGT/reviews_TV_AspTermsDFs.json'
-CoOccurMatFName = '/home/annamalai/Desktop/ABSA/AspectDetection/LuChen/DataAndGT/reviews_TV_CoOccurMat.txt'
+AspTermsFName = '/home/annamalai/Desktop/ABSA/AspectDetection/LuChen/DataAndGT/reviews_GPS_AspTermsAfterRemNonGooglew2v.txt'
+AspTermsDFFName = '/home/annamalai/Desktop/ABSA/AspectDetection/LuChen/DataAndGT/reviews_GPS_AspTermsDFs.json'
+CoOccurMatFName = '/home/annamalai/Desktop/ABSA/AspectDetection/LuChen/DataAndGT/reviews_GPS_CoOccurMat.txt'
 N = 500 # total num of rev docs
 
 # AspTermsFName = sys.argv[1]
@@ -51,6 +51,9 @@ for RIndex, RowT in enumerate(AspTerms):
             Dr = -log (float(Fxixj)/N)
             Frac = float(Nr)/Dr
         NPMIMat[RIndex][CIndex] = Frac
+
+#Rescale NPMI from [-1, 1] to [0,1]
+NPMIMat = (NPMIMat+1)/2
 
 print 'NPI matrix for each asp term is obtained and its shape: {}'.format(NPMIMat.shape)
 OpFName = CoOccurMatFName.replace('_CoOccurMat.txt','_NPMI.txt')
