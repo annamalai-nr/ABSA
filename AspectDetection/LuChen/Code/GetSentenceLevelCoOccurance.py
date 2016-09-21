@@ -59,6 +59,14 @@ for RowIndex, RowTerm in enumerate(AspTerms):
 #                                 for RowIndex, RowTerm in enumerate(AspTerms))
 
 CoOccurMat = np.array(CoOccurMat)
+for I in xrange (N):
+    CoOccurMat[I][I]=1
+
+for RowIndex in xrange(N):
+    for ColIndex in xrange(N):
+        if ColIndex > RowIndex:
+            CoOccurMat[RowIndex][ColIndex] = CoOccurMat[ColIndex][RowIndex]
+
 print 'Co-occurance matrix for each asp term is obtained from {} and its shape: {}'.format(AspTermsFName, CoOccurMat.shape)
 OpFName = AspTermsFName.replace('AspTermsAfterRemNonGooglew2v.txt','CoOccurMat.txt')
 np.savetxt(fname=OpFName, X=CoOccurMat, fmt='%d')
