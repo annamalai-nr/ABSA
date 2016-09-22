@@ -27,7 +27,7 @@ def GetLowerTriangle (RowTerm, RowIndex, AspTerms, TokenizedAllSentsInCorpus):
     print 'done row index: : {}, row term: {} in {} sec'.format(RowIndex, RowTerm, round (time()-T0,2))
     return CoOccurRow
 
-AspTermsFName = '/home/annamalai/Desktop/ABSA/AspectDetection/LuChen/DataAndGT/reviews_TV_AspTerms.txt'
+AspTermsFName = '/home/annamalai/Desktop/ABSA/AspectDetection/LuChen/DataAndGT/reviews_TV_AspTermsAfterRemNonGooglew2v.txt'
 AspTermsFName = sys.argv[1]
 AspTerms = [l.strip() for l in open (AspTermsFName)]
 RevFName = '/home/annamalai/Desktop/ABSA/AspectDetection/LuChen/DataAndGT/reviews_TV.json'
@@ -59,9 +59,6 @@ for RowIndex, RowTerm in enumerate(AspTerms):
 #                                 for RowIndex, RowTerm in enumerate(AspTerms))
 
 CoOccurMat = np.array(CoOccurMat)
-for I in xrange (N):
-    CoOccurMat[I][I]=1
-
 for RowIndex in xrange(N):
     for ColIndex in xrange(N):
         if ColIndex > RowIndex:
