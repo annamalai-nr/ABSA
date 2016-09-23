@@ -5,7 +5,6 @@ def GetAvgDist (RowClust, ColClust, AspTermsInfoDict):
     Nr = []
     for RowClustTerm in RowClust:
         for ColClustTerm in ColClust:
-            RowTermIndex = AspTermsInfoDict[RowClustTerm]['TermIndex']
             ColTermIndex = AspTermsInfoDict[ColClustTerm]['TermIndex']
             Sim = AspTermsInfoDict[RowClustTerm]['Sim'][ColTermIndex]
             Nr.append(1 - Sim)
@@ -30,6 +29,8 @@ def GetRepDist (RowClust, ColClust, AspTermsInfoDict):
 
 def GetClustDist (RowClust, ColClust, AspTermsInfoDict):
     DistAvg = GetAvgDist (RowClust, ColClust, AspTermsInfoDict)
+    if len (RowClust) == 1 and len(ColClust) == 1:
+        return DistAvg
     DistRep = GetRepDist (RowClust, ColClust, AspTermsInfoDict)
     Dist = max (DistAvg, DistRep)
     return Dist
@@ -46,13 +47,47 @@ def GetNounAvailStatus (RowClust, ColClust, AspTermsInfoDict):
     return False
 
 
-def GetClosestCluster (Clusters, AspTermsInfoDict):
+def GetClosestMergableCluster (Clusters, AspTermsInfoDict):
     DistsClustPairs = []
     for RClustIndex, RClust in enumerate(Clusters):
         for CClustIndex, CClust in enumerate(Clusters):
-            if RClustIndex > CClustIndex:
+            # if RClustIndex > CClustIndex:
+            if RClustIndex == CClustIndex:
+                continue
+            else:
                 Dist = GetClustDist(RClust, CClust, AspTermsInfoDict)
                 DistsClustPairs.append((Dist,(RClust,CClust)))
     DistsClustPairs.sort()
-    ClosestDist, ClosestClustPair = DistsClustPairs[0]
-    return ClosestClustPair, ClosestDist
+    for Dist, ClustPair in DistsClustPairs:
+        IsNounAvail = GetNounAvailStatus(ClustPair[0], ClustPair[1], AspTermsInfoDict)
+        if not IsNounAvail:  # constraint 1 fails
+            continue
+
+        IsSentCoOccurSignificant = GetSentCoOccurSignificance(ClustPair[0], ClustPair[1], AspTermsInfoDict)
+        if not IsSentCoOccurSignificant:
+            continue
+
+        return ClustPair, Dist
+    return (set(),set()), -1
+
+
+def GetSentCoOccurSignificance (RowClust, ColClust, AspTermsInfoDict):
+    SentCoOccurFreq = 0
+    DocSentDashCoOccurFreq = 0
+    for RowClustTerm in RowClust:
+        for ColClustTerm in ColClust:
+            if RowClustTerm == ColClustTerm:
+                continue
+            else:
+                ColTermIndex = AspTermsInfoDict[ColClustTerm]['TermIndex']
+                ThisPairSentCoCoccurFreq = AspTermsInfoDict[RowClustTerm]['SentCoOccurance'][ColTermIndex]
+                ThisPairDocSentDashCoCoccurFreq = AspTermsInfoDict[RowClustTerm]['DocSentDashCoOccurance'][ColTermIndex]
+                SentCoOccurFreq += ThisPairSentCoCoccurFreq
+                DocSentDashCoOccurFreq += ThisPairDocSentDashCoCoccurFreq
+
+    if SentCoOccurFreq > DocSentDashCoOccurFreq:
+        return True
+    else:
+        return False
+
+
