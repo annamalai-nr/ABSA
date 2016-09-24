@@ -21,25 +21,27 @@ def wordnet_sim(s1, s2, index1=0, index2=0):
             sim = 0.0
         # print sim
         # raw_input()
-        print 'completed similarty for {} and {} (i.e., {} and {}) to be {} in {} sec'.format(s1,s2,
-                                                                                              wordnet_s1, wordnet_s2,
-                                                                                              round(sim,2),round(time()-t0,2))
+        # print 'completed similarty for {} and {} (i.e., {} and {}) to be {} in {} sec'.format(s1,s2,
+        #                                                                                       wordnet_s1, wordnet_s2,
+        #                                                                                       round(sim,2),round(time()-t0,2))
         return sim
     except:
-        print 'Error in getting similarity for {}: {}'.format(s1,s2)
-        return -1.0
+        # print 'Error in getting similarity for words {} and {}'.format(s1,s2)
+        return -0.0
 
 
 AspTermsFName = '/home/annamalai/Desktop/ABSA/AspectDetection/LuChen/DataAndGT/reviews_TV_AspTermsAfterRemNonGooglew2v.txt'
-AspTerms = [l.strip() for l in open(AspTermsFName).xreadlines()][:10]
+AspTerms = [l.strip() for l in open(AspTermsFName).xreadlines()]#[:10]
 print 'loaded {} asp terms from {}'.format(len(AspTerms), AspTermsFName)
 
 WordnetSim = np.zeros (shape=(len(AspTerms), len(AspTerms)))
 for RTermIndex, RTerm in enumerate(AspTerms):
+    T0 = time()
     for CTermIndex, CTerm in enumerate(AspTerms):
         if RTermIndex >= CTermIndex:
             Sim = wordnet_sim(RTerm, CTerm, RTermIndex, CTermIndex)
             WordnetSim[RTermIndex, CTermIndex] = Sim
+    print 'processed row term {} in {} sec'.format(RTermIndex, time()-T0)
 
 
 WordnetSim = np.array (WordnetSim)
