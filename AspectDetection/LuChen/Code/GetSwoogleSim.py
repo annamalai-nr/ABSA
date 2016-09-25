@@ -23,22 +23,14 @@ def sss(s1, s2, type='relation', corpus='webbase', index1=0,index2=0):
         return -1.0
 
 def GetSimWithAllTerms (TgtTerm, TgtTermIndex, AllTerms):
-    # Sims = [sss(TgtTerm, Term) for Term in AllTerms]
-    Sims = Parallel(n_jobs=12)(delayed(sss)(TgtTerm, Term, index1=TgtTermIndex, index2=Index)
+    Sims = Parallel(n_jobs=8)(delayed(sss)(TgtTerm, Term, index1=TgtTermIndex, index2=Index)
                                for Index, Term in enumerate(AllTerms))
     return Sims
 
-AspTermsFName = '/mnt/AnnaLaptop/Desktop/ABSA/AspectDetection/LuChen/DataAndGT/reviews_TV_AspTermsAfterRemNonGooglew2v.txt'
-# AspTermsFName = '/home/annamalai/Desktop/ABSA/AspectDetection/LuChen/DataAndGT/reviews_TV_AspTermsAfterRemNonGooglew2v.txt'
+# AspTermsFName = '/mnt/AnnaLaptop/Desktop/ABSA/AspectDetection/LuChen/DataAndGT/reviews_TV_AspTermsAfterRemNonGooglew2v.txt'
+AspTermsFName = '/home/annamalai/Desktop/ABSA/AspectDetection/LuChen/DataAndGT/reviews_TV_AspTermsAfterRemNonGooglew2v.txt'
 AspTerms = [l.strip() for l in open(AspTermsFName).xreadlines()]#[:40]
 print 'loaded {} asp terms from {}'.format(len(AspTerms), AspTermsFName)
-
-# SwoogleSim = np.zeros (shape=(len(AspTerms),len(AspTerms)))
-# for RTermIndex, RTerm in enumerate(AspTerms):
-#     for CTermIndex, CTerm in enumerate(AspTerms):
-#         if RTermIndex > CTermIndex:
-#             Sim = sss(RTerm, CTerm, 'relation', 'webbase', RTermIndex, CTermIndex)
-#             SwoogleSim[RTermIndex,CTermIndex] = Sim
 
 
 SwoogleSim = []
@@ -46,12 +38,17 @@ for Index, Term in enumerate(AspTerms):
     Sims = GetSimWithAllTerms(Term, Index, AspTerms)
     SwoogleSim.append(Sims)
 
-OpFName = AspTermsFName.replace('AspTermsAfterRemNonGooglew2v.txt','SwoogleSimList.txt')
+OpFName = AspTermsFName.replace('AspTermsAfterRemNonGooglew2v.txt','SwoogleSimList_Laptop.txt')
 with open (OpFName,'w') as FH:
     for Row in SwoogleSim:
         print>>FH, (' '.join([str(S) for S in Row]))
 
 SwoogleSim = np.array (SwoogleSim)
+for RInd in xrange(len(AspTerms)):
+    for CInd in xrange(len(AspTerms)):
+        if RInd<CInd:
+            SwoogleSim[RInd, CInd] = SwoogleSim[CInd, RInd]
+
 print 'obtained SwoogleSimMat of shape', SwoogleSim.shape
-OpFName = AspTermsFName.replace('AspTermsAfterRemNonGooglew2v.txt','SwoogleSim.txt')
+OpFName = AspTermsFName.replace('AspTermsAfterRemNonGooglew2v.txt','SwoogleSimLaptop.txt')
 np.savetxt(OpFName,SwoogleSim,fmt='%.4f')
