@@ -1,5 +1,5 @@
 import numpy as np
-
+from pprint import pprint
 
 def GetAvgDist (RowClust, ColClust, AspTermsInfoDict):
     Nr = []
@@ -33,6 +33,7 @@ def GetClustDist (RowClust, ColClust, AspTermsInfoDict):
         return DistAvg
     DistRep = GetRepDist (RowClust, ColClust, AspTermsInfoDict)
     Dist = max (DistAvg, DistRep)
+    # Dist = min (DistAvg, DistRep)
     return Dist
 
 def GetNounAvailStatus (RowClust, ColClust, AspTermsInfoDict):
@@ -86,8 +87,38 @@ def GetSentCoOccurSignificance (RowClust, ColClust, AspTermsInfoDict):
                 DocSentDashCoOccurFreq += ThisPairDocSentDashCoCoccurFreq
 
     if SentCoOccurFreq > DocSentDashCoOccurFreq:
+        if len (RowClust) > 1 or len(ColClust) > 1:
+            print RowClust
+            print ColClust
+            print SentCoOccurFreq
+            print DocSentDashCoOccurFreq
+            # raw_input()
         return True
     else:
         return False
 
 
+def GetClosestSeedClust (SingletonClust, SeedClusters, Delta, AspTermsInfoDict):
+    # pprint (SingletonClust)
+    # pprint (SeedClusters)
+    DistsClustPairs = []
+    RClust = SingletonClust
+    for CClust in SeedClusters:
+        Dist = GetClustDist(RClust, CClust, AspTermsInfoDict)
+        DistsClustPairs.append((Dist, (RClust, CClust)))
+    DistsClustPairs.sort()
+    LeastDist = DistsClustPairs[0][0]
+    if LeastDist > Delta:
+        return set(), -1
+    else:
+        for Dist, ClustPair in DistsClustPairs:
+            IsNounAvail = GetNounAvailStatus(ClustPair[0], ClustPair[1], AspTermsInfoDict)
+            if not IsNounAvail:  # constraint 1 fails
+                continue
+
+            IsSentCoOccurSignificant = GetSentCoOccurSignificance(ClustPair[0], ClustPair[1], AspTermsInfoDict)
+            if not IsSentCoOccurSignificant: #const 2 fails
+                continue
+
+            return ClustPair[1], Dist #all 3 constraints passed
+        return set(), -1

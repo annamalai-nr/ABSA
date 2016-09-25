@@ -4,7 +4,7 @@ from collections import OrderedDict
 from copy import deepcopy
 from pprint import pprint
 import numpy as np
-from ClusterHelper import GetClustDist, GetNounAvailStatus, GetClosestMergableCluster, GetSentCoOccurSignificance
+from ClusterHelper import GetClustDist, GetNounAvailStatus, GetClosestMergableCluster, GetSentCoOccurSignificance, GetClosestSeedClust
 
 def GetDFAndPosForAspTerms (AspTerms, AspTermsDFName, AspTermsPosFName,
                             SentCoOccruFName, DocCoOccurFName,
@@ -121,7 +121,6 @@ def Mergable(Clusters, AspTermsInfoDict, Delta):
     return False
 
 
-
 def MergeSeedClusters (SeedClusters, AspTermsInfoDict, Delta):
     Clusters = deepcopy(SeedClusters)
     while (Mergable(Clusters, AspTermsInfoDict, Delta)):
@@ -140,16 +139,37 @@ def MergeSeedClusters (SeedClusters, AspTermsInfoDict, Delta):
 
     return Clusters
 
+
+
+def GetClustDF(Clust, AspTermsInfoDict):
+    DF = []
+    for Term in Clust:
+        DF.append(AspTermsInfoDict[Term]['DF'])
+    return sum(DF)
+
+
+def GetAspectClusters (FinalClusters, AspTermsInfoDict, K):
+    DFofClust = []
+    for Clust in FinalClusters:
+        DF = GetClustDF(Clust, AspTermsInfoDict)
+        DFofClust.append((DF, Clust))
+    DFofClust.sort()
+    AspectClusters = DFofClust[-K:]
+    return AspectClusters
+
+
+
+
 AspTermsFName = '/home/annamalai/Desktop/ABSA/AspectDetection/LuChen/DataAndGT/reviews_TV_AspTermsAfterRemNonGooglew2v.txt'
 AspTermsDFName = '/home/annamalai/Desktop/ABSA/AspectDetection/LuChen/DataAndGT/reviews_TV_AspTermsDFs.json'
 AspTermsPosFName = '/home/annamalai/Desktop/ABSA/AspectDetection/LuChen/DataAndGT/reviews_TV_AspTermsAndPos.txt'
-SimGFName = '/home/annamalai/Desktop/ABSA/AspectDetection/LuChen/DataAndGT/SimMats/reviews_TV_SimG.txt'
+SimGFName = '/home/annamalai/Desktop/ABSA/AspectDetection/LuChen/DataAndGT/SimMats/TV_word2vec_Sim.txt'
 SimTFName = '/home/annamalai/Desktop/ABSA/AspectDetection/LuChen/DataAndGT/SimMats/reviews_TV_SimT.txt'
 SimGTFName = '/home/annamalai/Desktop/ABSA/AspectDetection/LuChen/DataAndGT/SimMats/reviews_TV_SimGT.txt'
 SentCoOccurFName = '/home/annamalai/Desktop/ABSA/AspectDetection/LuChen/DataAndGT/SimMats/reviews_TV_SentCoOccurMat.txt'
 DocCoOccurFName = '/home/annamalai/Desktop/ABSA/AspectDetection/LuChen/DataAndGT/SimMats/reviews_TV_DocSentDashCoOccurMat.txt'
 # Params = {'s':500, 'k':50, 'delta':0.8, 'wg':0.2,'wt':0.2,'wgt':0.6}
-Params = {'s':500, 'k':50, 'delta':0.9, 'wg':0.2,'wt':0.1,'wgt':0.7}
+Params = {'s':500, 'k':50, 'delta':0.5, 'wg':0.8,'wt':0.1,'wgt':0.0}
 
 AspTerms = [l.strip() for l in open (AspTermsFName)]
 print 'loaded {} asp terms from file: {}'.format(len(AspTerms), os.path.basename(AspTermsFName))
@@ -171,18 +191,49 @@ raw_input()
 
 SeedTerms = GetSeedTerms (AspTermsInfoDict, Params['s'])
 print 'identified {} seed term based on DF of the terms'.format(len(SeedTerms))
-
-
-
-
-
+NonSeedTerms = list(set(AspTerms)-set(SeedTerms));NonSeedTerms.sort()
 
 Clusters = [set() for I in xrange(Params['s'])]
 for I in xrange (Params['s']): Clusters[I].add(SeedTerms[I])
 
 print 'made {} seed clusters with the {} seed terms'.format(len(Clusters), len(SeedTerms))
 
-Clusters = MergeSeedClusters (Clusters, AspTermsInfoDict, Params['delta'])
+SeedClusters = MergeSeedClusters (Clusters, AspTermsInfoDict, Params['delta'])
 
 print 'after merging seed clusters'
-pprint (Clusters)
+pprint (SeedClusters)
+
+
+FinalClusters = deepcopy(SeedClusters)
+
+for NonSeed in NonSeedTerms:
+    print NonSeed
+    ThisTermOnlyClust = {NonSeed}
+    ClosestSeedClust, ClosestDist = GetClosestSeedClust(SingletonClust=ThisTermOnlyClust, SeedClusters = FinalClusters,
+                        Delta = Params['delta'], AspTermsInfoDict=AspTermsInfoDict)
+
+    if ClosestDist == -1:
+        print 'non seed term: {} cannot be merged with any seed clust'.format(NonSeed)
+        # raw_input()
+        continue
+    else:
+        print 'non seed term: {} to be merged with seed clust: {}'.format(NonSeed, ClosestSeedClust)
+        # raw_input()
+        FinalClusters.remove(ClosestSeedClust)
+        NewClust = ClosestSeedClust.union(ThisTermOnlyClust)
+        FinalClusters.append(NewClust)
+
+
+# print 'seed clusts'
+# pprint (SeedClusters)
+# print 'seed clusts'
+# raw_input()
+#
+# print 'final clusts'
+# pprint (FinalClusters)
+# print 'final clusts'
+# raw_input()
+
+AspectClusters = GetAspectClusters (FinalClusters, AspTermsInfoDict, Params['k'])
+
+pprint (AspectClusters)
