@@ -5,7 +5,7 @@ from pprint import pprint
 from GetSentsWithSelectedAsp import PlotBars
 
 
-FName = 'SelectedAspectSentsInfo.json'
+FName = '../Data/SelectedAspectSentsInfo.json'
 with open(FName) as FH:
     SentInfoDict = json.load(FH)
 print 'loaded sent info dict with {} keys'.format(len(SentInfoDict))
@@ -13,14 +13,14 @@ print 'loaded sent info dict with {} keys'.format(len(SentInfoDict))
 SubjSentInfoDict = OrderedDict()
 for Sent, InfoDict in SentInfoDict.iteritems():
     for SubjAnalysedSent, SubjResDict in InfoDict['subj_analysis_res'].iteritems():
-        if SubjResDict['sentiment'] == 'postive' or SubjResDict['sentiment'] == 'negative':
+        if SubjResDict['sentiment'] == 'positive' or SubjResDict['sentiment'] == 'negative':
             SubjSentInfoDict[Sent] = InfoDict
             break
 
 print 'from a total of {} sentences, found {} subjectives ones'.format(len(SentInfoDict), len(SubjSentInfoDict))
 with open ('SubjSentencesInfo.json','w') as FH:
     json.dump(SubjSentInfoDict,FH,indent=4)
-
+#
 # PlotBars(SubjSentInfoDict)
 
 CSVData = []
