@@ -139,19 +139,24 @@ def GetAllNRCFeats (Sent, SentIndex, Cat):
     print 'processed sentence :{} in {} sec'.format(SentIndex, time()-T0)
     return AllFeats
 
-def Main ():
+def Main (FName, NumSentToProc=-1, NumCpu=8):
     T0 = time()
-    Sentences = [';'.join(l.strip().split(';')[:-2]) for l in open ('../../Data/RestAspCatABSA.csv').xreadlines()]#[:20]
-    Cat = [l.strip().split(';')[-2] for l in open ('../../Data/RestAspCatABSA.csv').xreadlines()]
-    Label = [l.strip().split(';')[-1] for l in open ('../../Data/RestAspCatABSA.csv').xreadlines()]
+    Sentences = [';'.join(l.strip().split(';')[:-2]) for l in open (FName).xreadlines()][:NumSentToProc]
+    Cat = [l.strip().split(';')[-2] for l in open (FName).xreadlines()][:NumSentToProc]
+    Label = [l.strip().split(';')[-1] for l in open (FName).xreadlines()][:NumSentToProc]
+    print 'loaded {} sents, {} cats and {} pol from {}'.format(len(Sentences), len(Cat), len(Label),FName)
+    raw_input('hit any key...')
     # AllFeatsExpSentences = []
     # for SentIndex, Sent in enumerate(Sentences):
     #     AllFeatsExpSentences.append (GetAllNRCFeats(Sent, SentIndex, Cat))
-    AllFeatsExpSentences = Parallel(n_jobs=8)(delayed(GetAllNRCFeats)(Sent, SentIndex, Cat) for SentIndex, Sent in enumerate(Sentences))
+    AllFeatsExpSentences = Parallel(n_jobs=NumCpu)(delayed(GetAllNRCFeats)(Sent, SentIndex, Cat) for SentIndex, Sent in enumerate(Sentences))
     with open ('AllNRCFeats.txt','w') as FH:
         for Index, Item in enumerate(AllFeatsExpSentences):
             print >>FH, str(Item)+';'+Label[Index]
 
     print 'processed {} sentences in a total of {} sec. with 8 cpu'.format(len(AllFeatsExpSentences), round (time()-T0,2))
 if __name__ == '__main__':
-    Main()
+    FName = '../../Data/RestAspCatABSA.csv'
+    FName = 'EnronSangSangSents.csv'
+    NumSent = -1
+    Main(FName=FName, NumSentToProc=NumSent, NumCpu=36)

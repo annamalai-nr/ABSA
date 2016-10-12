@@ -42,16 +42,19 @@ def GetLexTriplet (Tokens, PosLex, NegLex):
 
 def GetLexFeats(Sent, StemmedLexicons):
     # print Sent
-    HLPos, HLNeg = StemmedLexicons[0]
-    NrcPos, NrcNeg = StemmedLexicons[1]
-    SubjPos, SubjNeg = StemmedLexicons[2]
-    Tokens = tokenize(Sent.lower())
-    HLScores = GetLexTriplet (Tokens, PosLex = HLPos, NegLex = HLNeg)
-    NrcScores = GetLexTriplet (Tokens, PosLex = NrcPos, NegLex = NrcNeg)
-    SubjScores = GetLexTriplet (Tokens, PosLex = SubjPos, NegLex = SubjNeg)
-    AllLexFeats = [HLScores, NrcScores, SubjScores]
-    AllLexFeats = [item for sublist in AllLexFeats for item in sublist]
-    return AllLexFeats
+    try:
+        HLPos, HLNeg = StemmedLexicons[0]
+        NrcPos, NrcNeg = StemmedLexicons[1]
+        SubjPos, SubjNeg = StemmedLexicons[2]
+        Tokens = tokenize(Sent.lower())
+        HLScores = GetLexTriplet (Tokens, PosLex = HLPos, NegLex = HLNeg)
+        NrcScores = GetLexTriplet (Tokens, PosLex = NrcPos, NegLex = NrcNeg)
+        SubjScores = GetLexTriplet (Tokens, PosLex = SubjPos, NegLex = SubjNeg)
+        AllLexFeats = [HLScores, NrcScores, SubjScores]
+        AllLexFeats = [item for sublist in AllLexFeats for item in sublist]
+        return AllLexFeats
+    except:
+        return [0,0,0,0,0,0,0,0,0]
 
 def Main ():
     print 'no test code added here'
