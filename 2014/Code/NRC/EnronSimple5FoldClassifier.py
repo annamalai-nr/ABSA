@@ -35,8 +35,9 @@ def GetYFromStringLabels (Labels):
 
 def GetXYVocab (NumpSamples=-1):
     StemmedLexicons = LoadStemmedLex()
-    Lines = [l.strip() for l in open ('AllNRCFeatsEnronAspCatABSA.txt').xreadlines()][:NumpSamples]
-    Sentences = [''.join(l.strip().split(';')[:-2]) for l in open ('EnronAspCatsSangSangSents.csv').xreadlines()][:NumpSamples]
+    Lines = [l.strip() for l in open ('AllNRCFeatsAll3KEnronAspCatABSA.txt').xreadlines()][:NumpSamples]
+    print 'loaded {} lines from {}, about to perform feat ext'.format(len(Lines), 'AllNRCFeatsEnronAspCatABSA.txt')
+    Sentences = [''.join(l.strip().split(';')[:-2]) for l in open ('EnronAspCatsAnkitShanSangSangSents.csv').xreadlines()][:NumpSamples]
     LexFeats = [GetLexFeats(Sent, StemmedLexicons) for Sent in Sentences][:-1]
     LexFeats = np.array (LexFeats)
     LexFeats = csr_matrix (LexFeats)
@@ -64,13 +65,13 @@ def Main ():
     print 'FVs prepared of shape',X.shape
     for i in xrange (5):
         print 'run ',i+1
-        X_train, X_test, y_train, y_test = train_test_split (X, Y, test_size = 0.1,random_state=randint(0,100))
+        X_train, X_test, y_train, y_test = train_test_split (X, Y, test_size = 0.3,random_state=randint(0,100))
         print 'train and test shapes', X_train.shape, X_test.shape, np.array(y_train).shape, np.array(y_test).shape
         Params = {'C':[0.001,0.01,0.1,1,10,100,1000]}
         Classifier = grid_search.GridSearchCV(LinearSVC(class_weight='balanced'), Params,n_jobs=-1,cv=3)
         # Classifier = LinearSVC(C=0.1,class_weight='balanced')
         Classifier.fit(X_train, y_train)
-        # print 'best estimator after 5 fold CV: ', Classifier.best_estimator_
+        print 'best estimator after 5 fold CV: ', Classifier.best_estimator_
 
         # PerformFeatAnalysis (Classifier, X_train, Y, Vocab)
 
