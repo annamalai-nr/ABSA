@@ -157,6 +157,6 @@ def Main (FName, NumSentToProc=-1, NumCpu=8):
     print 'processed {} sentences in a total of {} sec. with 8 cpu'.format(len(AllFeatsExpSentences), round (time()-T0,2))
 if __name__ == '__main__':
     FName = '../../Data/RestAspCatABSA.csv'
-    FName = 'EnronSangSangSents.csv'
+    FName = 'EnronAspCatsSangSangSents.csv'
     NumSent = -1
     Main(FName=FName, NumSentToProc=NumSent, NumCpu=36)

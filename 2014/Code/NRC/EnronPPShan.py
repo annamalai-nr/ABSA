@@ -7,13 +7,18 @@ SelectedAspTerms = set(SelectedAspTerms)
 with open ('../../Data/EnronStuff/CommonAspTermToCatMapping.json') as FH:
     AspTermToCatMapping = json.load(FH)
 
-FName = '../../Data/EnronStuff/SelectedAspSubjSent6K_SangSang.csv'
-Lines = [l.strip() for l in open (FName) if l.strip()][3000:4000]
+FName = '../../Data/EnronStuff/SelectedAspSubjSent6K_Shan_Processed.csv'
+Lines = [l.strip() for l in open (FName) if l.strip()]
 Sentences = [l.strip().split('~')[0] for l in Lines]
 AspTerms = [list(l.strip().split('~')[1].split(';'))  for l in Lines]
 Polarities = [L.split('~')[-1].split(';') for L in Lines]
-Triplets = zip(Sentences, AspTerms, Polarities)
+NewPol = []
+for PolList in Polarities:
+    NewPol.append([Item.lower().replace(' ','') for Item in PolList])
+Triplets = zip(Sentences, AspTerms, NewPol)
 
+# pprint (Triplets)
+# raw_input()
 CleanedTriplets = []
 for Index, ThreeTup in enumerate(Triplets):
     FoundUnkownAspTerm = False
@@ -40,7 +45,7 @@ for ThreeTup in CleanedTriplets:
             break
 print 'Num of err triplets: ', len(ErrorTriples)
 
-with open('EnronAspCatsSangSangSents.csv','w') as FH:
+with open('EnronAspCatsShanSents.csv','w') as FH:
     for L in LinesToWrite:
         print >>FH, L
 

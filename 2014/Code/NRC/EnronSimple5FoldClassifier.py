@@ -36,7 +36,7 @@ def GetYFromStringLabels (Labels):
 def GetXYVocab (NumpSamples=-1):
     StemmedLexicons = LoadStemmedLex()
     Lines = [l.strip() for l in open ('AllNRCFeatsEnronAspCatABSA.txt').xreadlines()][:NumpSamples]
-    Sentences = [''.join(l.strip().split(';')[:-2]) for l in open ('EnronSangSangSents.csv').xreadlines()][:NumpSamples]
+    Sentences = [''.join(l.strip().split(';')[:-2]) for l in open ('EnronAspCatsSangSangSents.csv').xreadlines()][:NumpSamples]
     LexFeats = [GetLexFeats(Sent, StemmedLexicons) for Sent in Sentences][:-1]
     LexFeats = np.array (LexFeats)
     LexFeats = csr_matrix (LexFeats)
